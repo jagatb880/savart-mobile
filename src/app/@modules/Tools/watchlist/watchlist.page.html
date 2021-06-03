@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Watchlist</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="header">Your Watchlist</div>
+  <div class="watch-card" *ngFor="let item of watchList;let i = index;">
+    <div class="header">Company Name : {{item?.company_name}}</div>
+    <div class="body">
+      <div class="content">Price during addition:{{item?.current_price}}</div>
+      <div class="content">Date of Addition : {{item?.createddt | date:'dd-MMM-yyyy'}}</div>
+      <div class="content">Current Price : {{item?.latest_rate}}</div>
+      <div class="watcharea">
+        <ion-button shape="round" color="danger" (click)="removeWatchlist(item)">Remove</ion-button>
+        <ion-button shape="round" (click)="goTowatch(item)">Watch</ion-button>
+      </div>
+    </div>
+  </div>
+  <div class="notfound" *ngIf="watchList?.length <=0">No watchlist found !.</div>
+</ion-content>

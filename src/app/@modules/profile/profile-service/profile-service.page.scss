@@ -1,0 +1,64 @@
+.sercountry {
+  padding: 10px 0px 0px 16px;
+  font-family: Roboto-Regular;
+  font-size: 18px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  .country-img {
+    height: 20px;
+    width: 30px;
+  }
+  .country-name {
+    padding-left: 10px;
+    letter-spacing: 0.3px;
+  }
+}
+
+.selected-plan-cards {
+  margin: 15px 5px;
+  border: 1px solid #5c00d833;
+  border-radius: 13px;
+  padding: 16px;
+  box-shadow: 0px 0px 10px #8045d033;
+  color: #000000;
+  .header {
+    padding: 5px;
+    color: #000000;
+    font-size: 18px;
+    font-family: Roboto-Regular;
+  }
+  .plans {
+    margin: 5px;
+    padding: 5px;
+    color: #4a4a4a;
+    font-family: Roboto-Regular;
+    font-size: 16px;
+    z-index: 100;
+  }
+}
+
+.terms-area {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  padding: 16px;
+  font-family: Roboto-Regular;
+  .ion-checkbox {
+    padding-right: 10px;
+    display: inline-block;
+  }
+  .terms-label {
+    display: inline-block;
+    color: #4a4a4a;
+    margin-left: 10px;
+    .terms {
+      padding-left: 5px;
+      color: #1280d4;
+    }
+  }
+}
+
+.plans {
+  color: #4a4a4a;
+}

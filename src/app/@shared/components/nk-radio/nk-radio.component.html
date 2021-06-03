@@ -1,0 +1,15 @@
+<!-- <fieldset [id]="fieldset + order">
+  <ng-container *ngFor="let item of values">
+    <input (input)="onChanged(this)" type="radio" [id]="item + order" [name]="fieldset + order" />
+    <label [for]="item + order">{{ item }}</label>
+  </ng-container>
+</fieldset> -->
+
+<ion-radio-group mode="md" [value]="value" (ionChange)="ionChange.emit($event)" [disabled]="disabled">
+  <ng-container *ngFor="let item of values">
+    <ion-item lines="none">
+      <ion-radio [value]="item" [disabled]="disabled"></ion-radio>
+      <ion-label class="dynamic-radio-label">{{ item }}</ion-label>
+    </ion-item>
+  </ng-container>
+</ion-radio-group>

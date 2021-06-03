@@ -1,0 +1,146 @@
+<ion-content class="ion-padding">
+  <app-background></app-background>
+  <ng-container *ngIf="commonState$ | async as state">
+    <div class="page-center flex-column">
+      <div class="container_area">
+        <div class="logo_area">
+          <ion-img src="../../../../assets/image/logo.svg"></ion-img>
+        </div>
+        <ng-container
+          *ngIf="loginForm?.controls?.custregmobile?.dirty && loginForm?.controls?.custregmobile.valid; else errortemplate"
+        >
+        </ng-container>
+        <ion-item lines="none" class="input_area log-option" [formGroup]="loginForm">
+          <ion-icon name="call-outline"></ion-icon>
+          <ion-select
+            placeholder="+91"
+            formControlName="custcountrycode"
+            [interfaceOptions]="customAlertOptions"
+            interface="alert"
+          >
+            <ion-select-option *ngFor="let item of countryCodeList$ | async" value="{{item?.lookupname}}">
+              {{item?.displayval}}
+            </ion-select-option>
+          </ion-select>
+          <ion-input
+            formControlName="custregmobile"
+            class="nk-input"
+            type="tel"
+            placeholder="Enter mobile number"
+          ></ion-input>
+        </ion-item>
+
+        <!-- <ng-container
+          *ngIf="loginForm?.controls?.password?.dirty && loginForm?.controls?.password?.valid; else errortemplate"
+        >
+        </ng-container> -->
+        <ion-item lines="none" class="input_area" *ngIf="activeButton === 1" [formGroup]="loginForm">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <ion-input
+            formControlName="password"
+            class="nk-input"
+            [type]="passwordEyeShow === true ? 'text':'password'"
+            placeholder="Enter password"
+          ></ion-input>
+          <ion-icon
+            (click)="passwordEyeShow = passwordEyeShow ? false : true"
+            [name]="passwordEyeShow ? 'eye-outline': 'eye-off-outline' "
+          ></ion-icon>
+        </ion-item>
+        <div class="forgot-pswd" *ngIf="activeButton === 1">
+          <div slot="end" (click)="forgotPassword()">Forgot Password ?</div>
+        </div>
+        <app-nk-button
+          [disabled]="!loginForm?.valid"
+          *ngIf="activeButton === 0"
+          shape="round"
+          expand="block"
+          class="prime-btn"
+          (onClick)="submit()"
+          >Submit</app-nk-button
+        >
+        <app-nk-button
+          [disabled]="!loginForm?.valid"
+          *ngIf="activeButton === 1"
+          shape="round"
+          expand="block"
+          class="prime-btn"
+          (onClick)="login(state)"
+          >Login</app-nk-button
+        >
+        <app-nk-button
+          [disabled]="!loginForm?.valid"
+          *ngIf="activeButton === 2"
+          shape="round"
+          expand="block"
+          class="prime-btn"
+          (onClick)="sentOTP()"
+          >Send OTP</app-nk-button
+        >
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="bottom" style="position: absolute !important; bottom: 16px !important">
+    <ion-row>
+      <ion-col size="6">
+        <div class="terms" (click)="openURL('https://savart.in/ui/terms_conditions')">Terms & conditions</div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="privacy" (click)="openURL('https://savart.in/ui/privacypolicy')">Privacy Policy</div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
+
+<ng-template #errortemplate>
+  <ul class="has-error" *ngIf="!loginForm?.controls?.custregmobile.valid && loginForm?.controls?.custregmobile.dirty">
+    <li
+      *ngIf="
+        !loginForm?.controls?.custregmobile.valid &&
+        loginForm?.controls?.custregmobile.dirty &&
+        loginForm?.controls?.custregmobile.errors?.required
+      "
+    >
+      Please enter valid mobile number
+    </li>
+    <li *ngIf="loginForm?.controls?.custregmobile.dirty && loginForm?.controls?.custregmobile.errors?.minlength">
+      <!-- Minimum length should be {{loginForm?.controls?.custregmobile.errors?.minlength?.requiredLength}} -->
+      Please enter valid mobile number
+    </li>
+    <li *ngIf="loginForm?.controls?.custregmobile.dirty && loginForm?.controls?.custregmobile.errors?.maxlength">
+      <!-- Maximum length should be {{loginForm?.controls?.custregmobile.errors?.maxlength?.requiredLength }} -->
+      Please enter valid mobile number
+    </li>
+  </ul>
+</ng-template>
+
+<!-- <ng-template #errortemplate>
+  <ul class="has-error" *ngIf="!loginForm?.controls?.password?.valid && loginForm?.controls?.password?.dirty">
+    <li
+      *ngIf="
+        !loginForm?.controls?.password?.valid &&
+        loginForm?.controls?.password?.dirty &&
+        loginForm?.controls?.password?.errors?.required
+      "
+    >
+      This field is required
+    </li>
+    <li *ngIf="loginForm?.controls?.password?.dirty && loginForm?.controls?.password?.errors?.validateOneUppercase">
+      Password must contain one uppercase letter
+    </li>
+    <li *ngIf="loginForm?.controls?.password?.dirty && loginForm?.controls?.password?.errors?.validateOneLowercase">
+      Password must contain one lowercase letter
+    </li>
+    <li *ngIf="loginForm?.controls?.password?.dirty && loginForm?.controls?.password?.errors?.validateOneNumeric">
+      Password must contain one numeric letter
+    </li>
+    <li *ngIf="loginForm?.controls?.password?.dirty && loginForm?.controls?.password?.errors?.validateOneSpecialChar">
+      Password must contain one special character ( , . < > / # @ $ ! % * ? & )
+    </li>
+
+    <li *ngIf="loginForm?.controls?.password?.dirty && loginForm?.controls?.password?.errors?.minlength">
+      Password must be minimum eigth character
+    </li>
+  </ul>
+</ng-template> -->

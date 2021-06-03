@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">FAQ</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-virtual-scroll [items]="faqList">
+    <ion-item *virtualItem="let item;let i = index"> -->
+  <div *ngFor="let item1 of faqList;let j = index">
+    <div class="title">{{item1?.section_name}}</div>
+    <div class="faqlist" *ngFor="let item of item1?.questions;let i = index">
+      <div class="faqquestion" [id]="'faqquestion-wrapper-details'" (click)="expandItem(item,$event?.target?.id)">
+        <div class="icon">
+          <ion-icon *ngIf="faqList[j]?.questions[i]?.expanded!==true" name="add-outline"></ion-icon>
+          <ion-icon *ngIf="faqList[j]?.questions[i]?.expanded===true" name="remove-outline"></ion-icon>
+        </div>
+        <div class="question">{{item?.question || '-'}}</div>
+      </div>
+      <div class="faqanswer" [class.collapsed]="faqList[j]?.questions[i]?.expanded">{{item?.answer || '-'}}</div>
+    </div>
+  </div>
+  <!-- </ion-virtual-scroll> -->
+</ion-content>

@@ -1,0 +1,40 @@
+<ng-template [ngIf]="isSelected === false">
+  <ion-button
+    [disabled]="disabled"
+    [color]="color"
+    class="select-btn"
+    expand="block"
+    shape="round"
+    (click)="onButtonSelect()"
+  >
+    {{ content ? content : "Select" }}
+  </ion-button>
+</ng-template>
+<ng-template [ngIf]="isRenewal === true">
+  <ng-template [ngIf]="isSelected === true">
+    <ion-button
+      class="select-btn"
+      [disabled]="disabled"
+      color="secondary"
+      expand="block"
+      shape="round"
+      (click)="onButtonSelect()"
+    >
+      Selected</ion-button
+    >
+  </ng-template>
+</ng-template>
+<ng-template [ngIf]="isRenewal === false">
+  <ng-template [ngIf]="isSelected === true">
+    <ion-button
+      class="select-btn"
+      [disabled]="disabled"
+      color="secondary"
+      expand="block"
+      shape="round"
+      (click)="onButtonSelect()"
+    >
+      Selected</ion-button
+    >
+  </ng-template>
+</ng-template>

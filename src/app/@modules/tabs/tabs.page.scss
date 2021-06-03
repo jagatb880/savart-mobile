@@ -1,0 +1,19 @@
+ion-label {
+  font-family: Roboto-Medium;
+  font-size: 12px;
+  color: #3b3b3c;
+}
+
+ion-icon {
+  color: #3b3b3c;
+}
+ion-tab-button.tab-selected {
+  ion-label,
+  ion-icon {
+    color: #8a6edd !important;
+  }
+}
+
+ion-tab-bar {
+  border: none !important;
+}

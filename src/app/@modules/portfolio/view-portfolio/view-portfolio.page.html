@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">{{item && item[0] || '-'}}</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <table class="viewtable wd-100 text-center">
+    <tbody>
+      <tr class="wd-100 text-center">
+        <td class="text-left">Company Name</td>
+        <td>:</td>
+        <td class="text-right">{{item && item[0] || '-'}}</td>
+      </tr>
+      <tr>
+        <td class="text-left">Type</td>
+        <td>:</td>
+        <td class="text-right">{{item && item[1] || '-'}}</td>
+      </tr>
+      <tr>
+        <td class="text-left">Quantity</td>
+        <td>:</td>
+        <td class="text-right">{{item && item[2] || '-'}}</td>
+      </tr>
+      <tr>
+        <td class="text-left">Buy(B) / Sell(S)</td>
+        <td>:</td>
+        <td class="text-right">{{item && item[3] || '-'}}</td>
+      </tr>
+      <tr>
+        <td class="text-left">Purchase Price</td>
+        <td>:</td>
+        <td class="text-right">{{item && item[4] || '-'}}</td>
+      </tr>
+      <tr>
+        <td class="text-left">Current Price</td>
+        <td>:</td>
+        <td class="text-right">{{item && item[5] || '-'}}</td>
+      </tr>
+      <tr>
+        <td class="text-left">Gain / Loss</td>
+        <td>:</td>
+        <td class="text-right">{{item && item[6] || '-'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</ion-content>

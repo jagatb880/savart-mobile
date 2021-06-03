@@ -1,0 +1,53 @@
+.inputs {
+  margin-top: 10px;
+  ion-label {
+    font-size: 18px;
+    color: #4a4a4a;
+    font-family: Roboto-Regular;
+  }
+
+  ion-input {
+    font-family: Roboto-Regular;
+    font-size: 18px;
+    box-shadow: 0px 0px 6px #00000029;
+    border: 0.5px solid #4112c85c;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+
+  ion-input::placeholder {
+    font-family: Roboto-Regular;
+    color: #a0a0a3;
+    font-size: 18px;
+  }
+}
+
+.card {
+  margin: 16px 0px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background: url("../../../../assets/image/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  .label {
+    color: #ffffff;
+    font-size: 18px;
+    margin: 5px 0px;
+    font-family: Roboto-Regular;
+  }
+  .amount {
+    margin: 5px 0px;
+    color: #ffffff;
+    font-size: 21px;
+    font-family: Roboto-Regular;
+  }
+}
+
+.graph {
+  box-shadow: 0px 6px 15px #6d4cd433;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 10px 5px;
+}

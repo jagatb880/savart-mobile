@@ -1,0 +1,42 @@
+.header {
+  color: #000000;
+  font-size: 18px;
+  font-family: Roboto-Medium;
+  padding: 16px;
+}
+
+.watch-card {
+  margin: 10px 0px;
+  border: 0.5px solid #6937c780;
+  border-radius: 9px;
+  font-size: 18px;
+  font-family: Roboto-Regular;
+  box-shadow: 0px 1px 5px #6937c780;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    color: #000000;
+    border-bottom: 0.5px solid #6937c780;
+  }
+  .body {
+    font-size: 18px;
+    color: #444444;
+    font-family: Roboto-Regular;
+    padding: 5px;
+    .content {
+      padding: 5px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .watcharea {
+      text-align: right;
+    }
+  }
+}
+
+.notfound {
+  text-align: center;
+  margin: 10px 0px;
+  font-size: 18px;
+  font-family: Roboto-Regular;
+}

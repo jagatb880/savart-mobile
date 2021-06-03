@@ -1,0 +1,339 @@
+<div class="subscription-card">
+  <div class="header">
+    <div class="content">
+      {{ profile?.controls?.sername?.value }}
+    </div>
+  </div>
+  <div class="body">
+    <ion-row>
+      <ion-col
+        size="12"
+        *ngIf="
+          (profile?.controls?.isDiscriptionContent?.value === true &&
+            profile?.controls?.plan?.value === 2 &&
+            planUpgrad === true) ||
+          (profile?.controls?.isDiscriptionContent?.value === true &&
+            profile?.controls?.plan?.value === 1 &&
+            planUpgrad === false) ||
+          (profile?.controls?.isDiscriptionContent?.value === true && profile?.controls?.plan?.value === 0)
+        "
+      >
+        <div class="">
+          <table class="paid-description wd-100 text-center">
+            <tr class="wd-100 text-center">
+              <td class="text-left">Subscribed Date</td>
+              <td>:</td>
+              <td class="text-right">{{ profile?.controls?.desc?.value?.subscribed_date | date: "dd-MMM-yyyy" }}</td>
+            </tr>
+            <tr class="wd-100 text-center">
+              <td class="text-left">Expiry Date</td>
+              <td>:</td>
+              <td class="text-right">{{ profile?.controls?.desc?.value?.servexpdt | date: "dd-MMM-yyyy" }}</td>
+            </tr>
+            <tr class="wd-100 text-center">
+              <td class="text-left">Location</td>
+              <td>:</td>
+              <td class="text-right">{{ profile?.controls?.desc?.value?.servlocation }}</td>
+            </tr>
+            <tr class="wd-100 text-center">
+              <td class="text-left">Name</td>
+              <td>:</td>
+              <td class="text-right">{{ profile?.controls?.desc?.value?.servname }}</td>
+            </tr>
+            <tr class="wd-100 text-center">
+              <td class="text-left">Type</td>
+              <td>:</td>
+              <td class="text-right">{{ profile?.controls?.desc?.value?.servtype }}</td>
+            </tr>
+            <tr class="wd-100 text-center">
+              <td class="text-left">Paid Amount</td>
+              <td>:</td>
+              <td class="text-right">{{ profile?.controls?.desc?.value?.paid_amount }}</td>
+            </tr>
+            <tr class="wd-100 text-center" *ngIf="profile?.controls?.isExpired?.value === true">
+              <td class="text-center" colspan="3">Expired</td>
+            </tr>
+          </table>
+        </div>
+      </ion-col>
+      <ion-col size="7">
+        <div class="desc-area">
+          {{ profile?.controls?.serdesc?.value }}
+        </div>
+        <div class="inputbox" *ngIf="profile?.controls?.pricing_type?.value === 'F'">
+          <ng-template [ngIf]="profile?.controls?.isSelectedEitherAorB?.value == false">
+          <ng-container
+          *ngIf="profile?.controls?.serprice?.dirty && profile?.controls?.serprice?.valid; else errortemplate"
+          >
+        </ng-container>
+      </ng-template>
+
+              <ion-input
+                class="dynamic-input din1"
+                (input)="inputPriceEmit.emit($event?.target?.value)"
+                [min]="profile?.controls?.minlimit?.value"
+                [max]="profile?.controls?.maxlimit?.value"
+                [value]="profile?.controls?.serprice?.value"
+                type="number"
+                placeholder="Enter Investment Amount"
+              ></ion-input>
+           </div>
+      </ion-col>
+      <ion-col size="5" class="btn-area">
+        <ng-container
+          *ngIf="
+            (profile?.controls?.plan?.value === 1 && planUpgrad === false) ||
+              profile?.controls?.plan?.value === 2 ||
+              profile?.controls?.plan?.value === 3 ||
+              profile?.controls?.plan?.value === 0;
+            else planUpgradedTemp
+          "
+        >
+          <ng-container
+            *ngIf="
+              profile?.controls?.plan?.value &&
+              profile?.controls?.plan?.value !== 2 &&
+              profile?.controls?.plan?.value !== 3 &&
+              profile?.controls?.plan?.value !== 4 &&
+              profile?.controls?.plan?.value !== 0
+            "
+          >
+            <ng-template [ngTemplateOutlet]="planAbuttonArea"></ng-template>
+          </ng-container>
+
+          <ng-container
+            *ngIf="
+              profile?.controls?.plan?.value &&
+              profile?.controls?.plan?.value !== 1 &&
+              profile?.controls?.plan?.value !== 3 &&
+              profile?.controls?.plan?.value !== 4 &&
+              profile?.controls?.plan?.value !== 0
+            "
+          >
+            <ng-template [ngTemplateOutlet]="planBbuttonArea"></ng-template>
+          </ng-container>
+          <ng-container
+            *ngIf="
+              profile?.controls?.plan?.value &&
+              profile?.controls?.plan?.value !== 2 &&
+              profile?.controls?.plan?.value !== 1 &&
+              profile?.controls?.plan?.value !== 4 &&
+              profile?.controls?.plan?.value !== 0
+            "
+          >
+            <ng-template [ngTemplateOutlet]="planCbuttonArea"></ng-template>
+          </ng-container>
+
+          <ng-container *ngIf="profile?.controls?.plan?.value === 0">
+            <ng-template [ngTemplateOutlet]="training"></ng-template>
+          </ng-container>
+        </ng-container>
+      </ion-col>
+    </ion-row>
+  </div>
+</div>
+
+<ng-template #training>
+  <app-nk-select-button
+    *ngIf="profile?.controls?.isRenewal?.value === false"
+    class="select-btn"
+    [disabled]="
+      (profile?.controls?.pricing_type?.value === 'F' && profile?.controls?.serprice?.value === null) ||
+      profile?.controls?.serprice?.value === 0 ||
+      profile?.controls?.serprice?.invalid ||
+      profile?.controls?.paid_amount?.value !== 0 ||
+      profile?.controls?.isDisabled?.value
+    "
+    (onEmit)="buttonEmit($event)"
+    [content]="profile?.controls?.isDisabled?.value ? 'Subscribed' : 'Select'"
+    [color]="profile?.controls?.isDisabled?.value ? 'secondary' : 'primary'"
+    [isSelected]="profile?.controls?.isSelected?.value"
+  ></app-nk-select-button>
+
+  <app-nk-select-button
+    *ngIf="profile?.controls?.isRenewal?.value === true"
+    class="select-btn"
+    (onEmit)="buttonEmit($event)"
+    [content]="'Renewal'"
+    [isSelected]="profile?.controls?.isSelected?.value"
+  ></app-nk-select-button>
+</ng-template>
+
+<ng-template #planUpgradedTemp>
+  <app-nk-select-button
+    class="select-btn"
+    [color]="'secondary'"
+    [disabled]="true"
+    [content]="'Upgraded'"
+    [isSelected]="profile?.controls?.isSelected?.value"
+  ></app-nk-select-button>
+</ng-template>
+
+<ng-template #planAbuttonArea>
+  <app-nk-select-button
+    *ngIf="profile?.controls?.isDiscription?.value === false"
+    class="select-btn"
+    [disabled]="
+      (profile?.controls?.pricing_type?.value === 'F' && profile?.controls?.serprice?.value === null) ||
+      profile?.controls?.serprice?.value === 0 ||
+      profile?.controls?.serprice?.invalid ||
+      profile?.controls?.paid_amount?.value !== 0 ||
+      profile?.controls?.isDisabled?.value
+    "
+    (onEmit)="buttonEmit($event)"
+    [isSelected]="profile?.controls?.isSelected?.value"
+  ></app-nk-select-button>
+
+  <ng-template [ngIf]="profile?.controls?.isDiscription?.value === true">
+    <ion-button
+      *ngIf="profile?.controls?.isRenewal?.value === false"
+      color="secondary"
+      expand="block"
+      shape="round"
+      class="select-btn"
+      [disabled]="true"
+    >
+      Subscribed</ion-button
+    >
+    <app-nk-select-button
+      *ngIf="profile?.controls?.isRenewal?.value === true"
+      class="select-btn"
+      [content]="'Renewal'"
+      (onEmit)="buttonEmit($event)"
+      [isRenewal]="profile?.controls?.isRenewal?.value"
+      [isSelected]="profile?.controls?.isSelected?.value"
+    ></app-nk-select-button>
+  </ng-template>
+</ng-template>
+
+<ng-template #planBbuttonArea>
+  
+  <ng-template [ngIf]="profile?.controls?.isSelectedEitherAorB?.value === true" >
+  <app-nk-select-button
+    *ngIf="profile?.controls?.isDiscription?.value === false"
+    class="select-btn"
+    [disabled]="
+    (profile?.controls?.pricing_type?.value === 'F' && profile?.controls?.serprice?.value === null) ||
+    profile?.controls?.serprice?.value === 0 
+    "
+    (onEmit)="buttonEmit($event)"
+    [isSelected]="profile?.controls?.isSelected?.value"
+    ></app-nk-select-button>
+  </ng-template>
+  
+  <ng-template [ngIf]="profile?.controls?.isSelectedEitherAorB?.value === false" >
+  <app-nk-select-button
+    *ngIf="profile?.controls?.isDiscription?.value === false"
+    class="select-btn"
+    [disabled]="
+    (profile?.controls?.pricing_type?.value === 'F' && profile?.controls?.serprice?.value === null) ||
+    profile?.controls?.serprice?.value === 0 ||
+    profile?.controls?.serprice?.invalid ||
+    profile?.controls?.paid_amount?.value !== 0 ||
+    profile?.controls?.isDisabled?.value
+    "
+    (onEmit)="buttonEmit($event)"
+    [isSelected]="profile?.controls?.isSelected?.value"
+    ></app-nk-select-button>
+  </ng-template>
+
+  <ng-container *ngIf="profile?.controls?.isDiscription?.value === true">
+    <div class="flexplanb">
+
+  <ng-template [ngIf]="profile?.controls?.isSelectedEitherAorB?.value === true" >
+      <app-nk-select-button
+        *ngIf="profile?.controls?.isRenewal?.value === true"
+        class="select-btn"
+        [content]="'Renewal'"
+        (onEmit)="buttonEmit($event)"
+        [disabled]="
+          (profile?.controls?.pricing_type?.value === 'F' && profile?.controls?.serprice?.value === null) ||
+          profile?.controls?.serprice?.value === 0 
+        "
+        [isRenewal]="profile?.controls?.isRenewal?.value"
+        [isSelected]="profile?.controls?.isSelected?.value"
+      ></app-nk-select-button>
+  </ng-template>
+  <ng-template [ngIf]="profile?.controls?.isSelectedEitherAorB?.value === false" >
+      <app-nk-select-button
+        *ngIf="profile?.controls?.isRenewal?.value === true"
+        class="select-btn"
+        [content]="'Renewal'"
+        (onEmit)="buttonEmit($event)"
+        [disabled]="
+          (profile?.controls?.pricing_type?.value === 'F' && profile?.controls?.serprice?.value === null) ||
+          profile?.controls?.serprice?.value === 0 ||
+          profile?.controls?.serprice?.invalid
+        "
+        [isRenewal]="profile?.controls?.isRenewal?.value"
+        [isSelected]="profile?.controls?.isSelected?.value"
+      ></app-nk-select-button>
+  </ng-template>
+
+  <ng-template [ngIf]="profile?.controls?.isSelectedEitherAorB?.value === false" >
+      <app-nk-select-button
+        *ngIf="profile?.controls?.isDiscription?.value === true"
+        expand="block"
+        shape="round"
+        class="select-btn"
+        [content]="'Upgrade'"
+        [disabled]="
+          (profile?.controls?.pricing_type?.value === 'F' && profile?.controls?.serprice?.value === null) ||
+          profile?.controls?.serprice?.value === 0 ||
+          profile?.controls?.serprice?.value === '' ||
+          profile?.controls?.serprice?.value === null ||
+          profile?.controls?.serprice?.invalid
+        "
+        (onEmit)="buttonEmitUpgrade($event)"
+      ></app-nk-select-button>
+      </ng-template>
+      
+
+  <ng-template [ngIf]="profile?.controls?.isSelectedEitherAorB?.value === true" >
+      <app-nk-select-button
+        *ngIf="profile?.controls?.isDiscription?.value === true"
+        expand="block"
+        shape="round"
+        class="select-btn"
+        [content]="'Upgrade'"
+        [disabled]="
+          (profile?.controls?.pricing_type?.value === 'F' && profile?.controls?.serprice?.value === null) ||
+          profile?.controls?.serprice?.value === 0 ||
+          profile?.controls?.serprice?.value === '' ||
+          profile?.controls?.serprice?.value === null
+        "
+        (onEmit)="buttonEmitUpgrade($event)"
+      ></app-nk-select-button>
+      </ng-template>
+
+      <!-- [isSelected]="profile?.controls?.isSelected?.value" -->
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #planCbuttonArea>
+  <app-nk-select-button
+    class="select-btn"
+    [disabled]="
+      (profile?.controls?.pricing_type?.value === 'F' && profile?.controls?.serprice?.value === null) ||
+      profile?.controls?.serprice?.value === 0 ||
+      profile?.controls?.serprice?.invalid ||
+      profile?.controls?.paid_amount?.value !== 0 ||
+      profile?.controls?.isDisabled?.value
+    "
+    (onEmit)="buttonEmit($event)"
+    [isSelected]="profile?.controls?.isSelected?.value"
+  ></app-nk-select-button>
+</ng-template>
+
+<ng-template #errortemplate>
+  <ul class="has-error" *ngIf="!profile?.controls?.serprice?.valid && profile?.controls?.serprice?.errors">
+    <li *ngIf="profile?.controls?.serprice?.errors?.min?.min ">
+      The minimum amount should be {{ profile?.controls?.minlimit?.value }}
+    </li>
+
+    <li *ngIf="profile?.controls?.serprice?.errors?.max?.max">
+      The maximum amount should be {{ profile?.controls?.maxlimit?.value }}
+    </li>
+  </ul>
+</ng-template>

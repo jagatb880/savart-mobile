@@ -1,0 +1,69 @@
+.disabled {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  user-select: none;
+  pointer-events: none;
+
+  background: #cccccc !important;
+  opacity: 0.3;
+  border-radius: 12px;
+}
+
+.nk-card {
+  position: relative;
+  z-index: 2;
+  border: 1px solid #e7e4ec;
+  height: 146px;
+  border-radius: 13px;
+  background: url("../../../../assets/image/background.png");
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 10px 5px;
+  .nk-card-background {
+    position: absolute;
+    z-index: -1;
+    ion-img {
+      height: 146px;
+      width: 100%;
+      object-fit: fill;
+    }
+  }
+  .nk-content {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 13px;
+    height: 146px;
+    color: white;
+    font-family: "Roboto-Medium";
+    font-size: 23px;
+    border-radius: 5px;
+    .nk-icon {
+      background: #e7dff7;
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 25px;
+      // margin: 4px;
+    }
+
+    .nk-body {
+      color: white;
+    }
+    .nk-body1 {
+      font-size: 15px;
+      color: #4a4a4a !important;
+      font-family: Roboto-Medium;
+      text-align: center;
+    }
+  }
+}

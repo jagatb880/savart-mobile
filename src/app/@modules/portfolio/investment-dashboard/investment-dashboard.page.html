@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Dashboard</ion-title>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container
+    *ngIf="{
+  expired: getExpired$ | async
+    } as data"
+  >
+    <div class="ion-padding">
+      <app-nk-card
+        [disabled]="isPendingList?.length<=0"
+        [label]="isPendingList?.length>0 ? 'Incomplete Profile': 'Complete Profile'"
+        (click)="navigatePending()"
+        icon="Complete Profile"
+      ></app-nk-card>
+      <app-nk-card
+        [disabled]="isPendingList?.length>0 || data?.expired"
+        label="Start Investing"
+        (click)="navigate('/tabs/tab2/request-advice')"
+        icon="Start Investing"
+      ></app-nk-card>
+      <app-nk-card
+        [disabled]="isPendingList?.length>0 || data?.expired"
+        label="Review Portfolio"
+        (click)="navigate('/tabs/tab2/upload-portfolio')"
+        icon="Review Existing"
+      ></app-nk-card>
+    </div>
+  </ng-container>
+</ion-content>

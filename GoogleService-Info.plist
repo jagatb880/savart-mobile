@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>266048666059-g31gpotfhi2hnr0dql4uuum2c6jg0qff.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.266048666059-g31gpotfhi2hnr0dql4uuum2c6jg0qff</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDgPRJ7mfOp4vNHvNcK-XqBStijolVd058</string>
+	<key>GCM_SENDER_ID</key>
+	<string>266048666059</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.savart</string>
+	<key>PROJECT_ID</key>
+	<string>savart-mob</string>
+	<key>STORAGE_BUCKET</key>
+	<string>savart-mob.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:266048666059:ios:d79cd41c00a7f90d6b9e4e</string>
+	<key>DATABASE_URL</key>
+	<string>https://savart-mob.firebaseio.com</string>
+</dict>
+</plist>

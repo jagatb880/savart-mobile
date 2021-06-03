@@ -1,0 +1,204 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Dashboard</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="gain-card1">
+    <div class="label" (click)="navigate('/tabs/tab2/request-advice')">
+      <div class="icon-area">
+        <ion-icon src="../../../../assets/icon/New investment.svg"></ion-icon>
+      </div>
+      <div class="icon-label">New Investment</div>
+    </div>
+    <div class="line"></div>
+    <div class="label" (click)="navigate('/tabs/tab2/upload-portfolio')">
+      <div class="icon-area">
+        <ion-icon src="../../../../assets/icon/Review Existing.svg"></ion-icon>
+      </div>
+      <div class="icon-label">Review Existing</div>
+    </div>
+    <div class="line"></div>
+    <div class="label" (click)="viewPortfolio()">
+      <div class="icon-area">
+        <ion-icon src="../../../../assets/icon/View Portfolio.svg"></ion-icon>
+      </div>
+      <div class="icon-label">View Portfolio</div>
+    </div>
+  </div>
+
+  <div class="gain-area ion-top-padding">
+    <div class="gain">
+      Gain
+      <ion-img
+        [ngClass]="{'rotate': currentPortfolio?.portfolio_details?.total_gain_perc > 0 ?  false : true}"
+        src="../../../../assets/image/gain.png"
+      ></ion-img>
+    </div>
+    <div class="gainvalue">{{currentPortfolio?.portfolio_details?.total_gain_perc || ' - '}} %</div>
+  </div>
+  <div class="gain-card">
+    <div class="label">Current Value</div>
+    <div class="value">
+      <ion-icon class="inr" src="../../../../assets/icon/inr.svg"></ion-icon>
+      {{currentPortfolio?.portfolio_details?.total_latest_value || ' - '}}
+    </div>
+  </div>
+  <div class="gain-card">
+    <div class="label">Invested</div>
+    <div class="value">
+      <ion-icon class="inr" src="../../../../assets/icon/inr.svg"></ion-icon>
+      {{currentPortfolio?.portfolio_details?.total_invested || ' - '}}
+    </div>
+  </div>
+  <div class="gain-card">
+    <div class="label">Advised</div>
+    <div class="value">
+      <ion-icon class="inr" src="../../../../assets/icon/inr.svg"></ion-icon>
+      {{currentPortfolio?.advised_details?.asset_rate || ' - '}}
+    </div>
+  </div>
+
+  <div class="goals ion-top-padding">
+    <div class="goal-card ion-top-margin" *ngFor="let item of goalList;let i = index">
+      <div class="header">
+        <div class="name">{{item?.goalname || '-'}}</div>
+        <ion-icon [src]="'../../../../assets/icon/'+item?.goalicon1 "></ion-icon>
+      </div>
+      <div class="content">
+        <div class="label">Target</div>
+        <div class="value">
+          <ion-icon class="inr" src="../../../../assets/icon/inr.svg"></ion-icon> {{item?.goaltargetamt || ' - '}}
+        </div>
+      </div>
+      <div class="content">
+        <div class="label">Current</div>
+        <div class="value">
+          <ion-icon class="inr" src="../../../../assets/icon/inr.svg"></ion-icon>
+          {{item?.goal_invested_current_amount || ' - '}}
+        </div>
+      </div>
+      <div class="content">
+        <div class="label">Invested</div>
+        <div class="value">
+          <ion-icon class="inr" src="../../../../assets/icon/inr.svg"></ion-icon>
+          {{item?.goal_invested_amount || ' - '}}
+        </div>
+      </div>
+      <div class="content">
+        <div class="label">Gain</div>
+        <div class="value">
+          <ion-icon class="inr" src="../../../../assets/icon/inr.svg"></ion-icon>
+          {{item?.gain_amount_ongoal || ' - '}}
+        </div>
+      </div>
+      <div class="content">
+        <div class="label">Gain %</div>
+        <div class="value">{{item?.gain_percent_ongoal || ' - '}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="viewPortfolio" class="ion-top-padding">
+    <div class="ion-top-padding">
+      <div class="tables">
+        <table class="transaction-table">
+          <thead>
+            <tr>
+              <!-- <th>#</th> -->
+              <th class="br-r">Investment Company Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ion-virtual-scroll [items]="fullDashboardList" approxItemHeight="10px">
+              <tr *virtualItem="let item;let i= index">
+                <!-- <td>{{i+1}}</td> -->
+                <td
+                  class="text-center"
+                  style="
+                    color: blue;
+                    padding: 5px 0px !important;
+                    text-decoration: underline;
+                    width: 100vw;
+                    text-align: center !important;
+                  "
+                  (click)="viewPortfolioModal(item)"
+                >
+                  {{ item[0] || '-'}}
+                </td>
+              </tr>
+            </ion-virtual-scroll>
+          </tbody>
+        </table>
+
+        <!-- <table class="transaction-table">
+          <thead>
+            <tr>
+              <th style="min-width: 150px">Type of Investment</th>
+              <th class="br-r" style="min-width: 150px">Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="width: 100%">
+              <td colspan="2">
+                <ion-virtual-scroll [items]="fullDashboardList" approxItemHeight="320px">
+                  <tr *virtualItem="let item">
+                    <td style="min-width: 150px">{{item[1] || '-'}}</td>
+                    <td style="min-width: 150px">{{item[2] || '-'}}</td>
+                  </tr>
+                </ion-virtual-scroll>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="transaction-table">
+          <thead>
+            <tr>
+              <th style="min-width: 150px">Buy(B) / Sell(S)</th>
+              <th class="br-r" style="min-width: 150px">Purchase Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="width: 100%">
+              <td colspan="2">
+                <ion-virtual-scroll [items]="fullDashboardList" approxItemHeight="320px">
+                  <tr *virtualItem="let item">
+                    <td style="min-width: 150px">{{item[3] || '-'}}</td>
+                    <td style="min-width: 150px">{{item[4] || '-'}}</td>
+                  </tr>
+                </ion-virtual-scroll>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="transaction-table">
+          <thead>
+            <tr>
+              <th style="min-width: 150px">Current Price</th>
+              <th style="min-width: 150px" class="br-r">Gain / Loss</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="width: 100%">
+              <td colspan="2">
+                <ion-virtual-scroll [items]="fullDashboardList" approxItemHeight="320px">
+                  <tr *virtualItem="let item">
+                    <td style="min-width: 150px">{{item[5] || '-'}}</td>
+                    <td style="min-width: 150px">{{item[6] || '-'}}</td>
+                  </tr>
+                </ion-virtual-scroll>
+              </td>
+            </tr>
+          </tbody>
+        </table> -->
+      </div>
+    </div>
+  </div>
+</ion-content>

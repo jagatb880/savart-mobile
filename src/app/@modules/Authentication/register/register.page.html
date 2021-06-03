@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="" [formGroup]="profileForm">
+    {{getProfiles().controls.length}}
+    <ng-container formArrayName="profiles">
+      <div *ngFor="let profile of getProfiles().controls; let i=index" [formGroupName]="i">
+        {{profile?.get('profqtype')?.value}}
+        <app-dynamic-input
+          [inputType]="profile?.get('profqtype')?.value"
+          [label]="profile?.get('profqname')?.value"
+          [values]="profile?.get('values')?.value"
+          [order]="profile?.get('profqorder')?.value"
+          [fieldset]="profile?.get('profqname')?.value + profile?.get('profqorder')?.value"
+          formControlName="custresponse"
+        ></app-dynamic-input>
+      </div>
+    </ng-container>
+
+    <button (click)="getValue()">GetValue</button>
+  </div>
+</ion-content>

@@ -1,0 +1,127 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Transaction Log</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ng-template [ngIf]="item?.service_name">
+    <table class="transaction-table">
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th class="br-r">Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{item?.sercountry || '-'}}</td>
+          <td>{{item?.service_name || '-'}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="ion-top-padding">
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th class="br-r">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{item?.date_subscribed | date:'dd-MM-yyyy' || '-'}}</td>
+            <td>{{item?.paid_amount || '-'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ion-top-padding">
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>Service Type</th>
+            <th>Service Status</th>
+            <!-- <th>Subscription Status</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{item?.service_type || '-'}}</td>
+            <td>{{item?.subscription_status == 'A' ? 'Active' : 'Inactive' || '-'}}</td>
+            <!-- <td>{{item?.subscription_status || '-'}}</td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="item?.asset">
+    <table class="transaction-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Asset</th>
+          <th>qty</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{item?.transdt | date:'dd-MM-yyyy' || '-'}}</td>
+          <td>{{item?.asset || '-'}}</td>
+          <td>{{item?.qty || '-'}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="ion-top-margin">
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Rate</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{item?.transtype || '-'}}</td>
+            <td>{{item?.rate || '-'}}</td>
+            <td>{{item?.status || '-'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ion-top-padding">
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>Amount</th>
+            <th>Orgin</th>
+            <th>Exchange</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{item?.inv_amount || '-'}}</td>
+            <td>{{item?.transorgin || '-'}}</td>
+            <td>{{item?.transexchange || '-'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="item?.asset">
+    <div class="ion-margin">
+      <ion-button shape="round" expand="block" (click)="showAdvice()">Show Advice</ion-button>
+    </div>
+    <div class="ion-margin">
+      <ion-button shape="round" expand="block" (click)="uploadContract()">Upload Contract Notes</ion-button>
+    </div>
+  </ng-template>
+</ion-content>

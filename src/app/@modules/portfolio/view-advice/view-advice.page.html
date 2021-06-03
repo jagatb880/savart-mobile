@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">View Advice</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <div class="disclaimer">
+    NOTE : Please upload contract notes/transaction statement to track your portfolio in the app. Read more about
+    contract notes <span class="url" (click)="contract()">here</span>
+  </div>
+  <div class="ion-margin">
+    <ion-button shape="round" expand="block" (click)="showAdvice()">View Transaction</ion-button>
+  </div>
+  <div class="ion-margin">
+    <ion-button shape="round" expand="block" (click)="uploadContract()">Upload Contract Notes</ion-button>
+  </div>
+
+  <ng-template [ngIf]="viewAdviceList?.length >0">
+    <table class="transaction-table">
+      <thead>
+        <tr>
+          <th class="br-r">Investment Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of viewAdviceList;let i = index">
+          <td>{{item?.comapny_name || '-'}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="transaction-table">
+      <thead>
+        <tr>
+          <th>Investment Type</th>
+          <th class="br-r">Country</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of viewAdviceList;let i = index">
+          <td>{{item?.investment_type || '-'}}</td>
+          <td>{{item?.country || '-'}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="transaction-table">
+      <thead>
+        <tr>
+          <th>Research Note</th>
+          <th class="br-r">Allocation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of viewAdviceList;let i = index">
+          <td (click)="openReaserchNote(item?.research_note)">
+            <div *ngIf="item?.research_note && item?.research_note != '';else temp">
+              <ion-icon name="document-outline" style="font-size: 20px"></ion-icon>
+            </div>
+          </td>
+          <td>{{item?.allocation || '-'}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #temp>
+      <div>-</div>
+    </ng-template>
+
+    <table class="transaction-table">
+      <thead>
+        <tr>
+          <th>Exchange</th>
+          <th class="br-r">Code</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of viewAdviceList;let i = index">
+          <td>{{item?.exchange || '-'}}</td>
+          <td>{{item?.code || '-'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
+</ion-content>

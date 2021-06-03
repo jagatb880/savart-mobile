@@ -1,0 +1,14 @@
+{
+  "/clients/*": {
+    "target": "http://savart.eastus.cloudapp.azure.com:8000",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/public/*": {
+    "target": "http://savart.eastus.cloudapp.azure.com:8000",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

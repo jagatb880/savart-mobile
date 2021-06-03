@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Inbox</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding inboxmsg">
+  <div class="submit">
+    <ion-button shape="round" (click)="navigate()"
+      *ngIf="messages?.actionrequired === 'View Advice'">View Advice</ion-button>
+  </div>
+
+  <div class="ion-top-padding">
+    <div class="header">
+      <div class="subject">{{messages?.subject}}</div>
+      <div class="date">{{messages?.time_stamp | mydate:'lll'}}</div>
+    </div>
+    <div class="content" [innerHtml]=" messages?.msgbody| imagesafe:'HTML'"></div>
+  </div>
+</ion-content>

@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Watchlist</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="screener">
+    <div class="desc">{{screener?.desc}}</div>
+    <ion-item> Market Cap : {{screener?.market_gap}} Cr </ion-item>
+    <ion-item> Current Price : {{screener?.current_price}} </ion-item>
+    <ion-item> ROCE : {{screener?.ROCE}} % </ion-item>
+    <ion-item> Sales Growth : {{screener?.sales_growth}} % </ion-item>
+    <ion-item> Face Value : {{screener?.face_value}} </ion-item>
+    <ion-item> Stock P/E : {{screener?.stock_P_E}} </ion-item>
+  </div>
+</ion-content>

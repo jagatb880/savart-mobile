@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Goal Manager</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="disclaimer">
+    NOTE : Please select your preferred goals to help us plan your investment accordingly. Maximum of
+    {{selectGoalLength}} goals can be selected. In case you do not wish to disclose, just choose the ‘Long Term Wealth
+    Creation’ option (which is a default option )
+  </div>
+  <ion-row>
+    <ng-container *ngFor="let item of goalList;let i = index">
+      <ion-col size="6">
+        <app-nk-card
+          [isSelected]="item?.isSelected || false"
+          [background]="true"
+          [label]="item?.goalname"
+          (click)="navigate(item)"
+          [icon]="item?.goalicon1"
+        ></app-nk-card>
+      </ion-col>
+    </ng-container>
+  </ion-row>
+</ion-content>

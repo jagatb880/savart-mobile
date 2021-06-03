@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <div class="" slot="start"></div> -->
+    <ion-title>Portfolio</ion-title>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <!-- <app-nk-card
+      label="Dashboard"
+      (click)="navigate('/tabs/tab2/investment-dashboard')"
+      icon="Full Dashboard"
+    ></app-nk-card> -->
+    <app-nk-card label="Goal Manager" (click)="navigate('/tabs/tab2/select-goal')" icon="Add a Goal"></app-nk-card>
+    <ng-container
+      *ngIf="{
+      expired: getExpired$ | async
+        } as data"
+    >
+      <app-nk-card
+        [disabled]="data?.expired"
+        label="New Investment"
+        (click)="checkRequsetAdivce('/tabs/tab2/request-advice')"
+        icon="New investment"
+      ></app-nk-card>
+      <app-nk-card
+        [disabled]="data?.expired"
+        label="Review Portfolio"
+        (click)="navigate1('/tabs/tab2/upload-portfolio')"
+        icon="Review Existing"
+      ></app-nk-card>
+      <!-- <app-nk-card label="Current Portfolio" (click)="navigate('')" icon="Current Portfolio"></app-nk-card> -->
+      <app-nk-card
+        label="Full Dashboard"
+        (click)="navigate('/tabs/tab2/full-dashboard')"
+        icon="Full Dashboard"
+      ></app-nk-card>
+      <app-nk-card
+        [disabled]="data?.expired"
+        label="Transaction Log"
+        (click)="navigate1('/tabs/tab2/transaction-log')"
+        icon="Transaction Log"
+      ></app-nk-card>
+    </ng-container>
+  </div>
+</ion-content>

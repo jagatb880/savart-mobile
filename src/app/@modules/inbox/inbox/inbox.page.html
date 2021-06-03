@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <div class="" slot="start"></div> -->
+    <ion-title>Inbox</ion-title>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-segment [(ngModel)]="segmentValue" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="All">
+      <ion-label>All ( {{messageList?.length}} ) </ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="NEW">
+      <ion-label>Unread <ion-badge color="primary">{{unReadMessageList?.length}}</ion-badge> </ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing..."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="segmentValue == 'All'">
+    <ion-virtual-scroll [items]="messageList">
+      <div *virtualItem="let item" class="inbox-area" [class.opened]="item?.status === 'READ'" (click)="open(item)">
+        <div class="header">
+          <div class="subject">{{item?.subject}}</div>
+          <div class="date">{{item?.time_stamp | mydate}}</div>
+        </div>
+        <div class="body">{{item?.msgbody}}</div>
+      </div>
+    </ion-virtual-scroll>
+  </div>
+
+  <div *ngIf="segmentValue == 'NEW'">
+    <ion-virtual-scroll [items]="unReadMessageList">
+      <div
+        class="inbox-area"
+        *virtualItem="let item"
+        [ngClass]="{'opened': item?.status === 'READ'}"
+        (click)="open(item)"
+      >
+        <div class="header">
+          <div class="subject">{{item?.subject}}</div>
+          <div class="date">{{item?.time_stamp | mydate}}</div>
+        </div>
+        <div class="body">{{item?.msgbody}}</div>
+      </div>
+    </ion-virtual-scroll>
+  </div>
+</ion-content>

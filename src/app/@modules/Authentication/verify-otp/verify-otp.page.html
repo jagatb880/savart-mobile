@@ -1,0 +1,72 @@
+<ion-content class="ion-padding">
+  <app-background></app-background>
+
+  <!-- <div class="back-btn-area"><ion-icon name="chevron-back-outline" (click)="backbtn()"></ion-icon></div> -->
+  <ng-container *ngIf="(commonState$ | async) as state">
+    <div class="page-center flex-column">
+      <div class="container_area">
+        <div class="logo_area">
+          <ion-img src="../../../../assets/image/logo.svg"></ion-img>
+        </div>
+        <ion-text class="text-content text-center"
+          >OTP sent to +{{state?.custcountrycode}} {{state?.custregmobile}}
+        </ion-text>
+        <div class="opt-box-area" [formGroup]="otpForm">
+          <input
+            class="nk-otp-box"
+            tabindex="1"
+            (keyup)="focusNext($event,1)"
+            maxlength="1"
+            formControlName="first"
+            type="tel"
+            placeholder=""
+            #first
+          />
+          <input
+            class="nk-otp-box"
+            tabindex="2"
+            (keyup)="focusNext($event,2)"
+            maxlength="1"
+            formControlName="second"
+            #second
+            type="tel"
+            placeholder=""
+          />
+          <input
+            class="nk-otp-box"
+            tabindex="3"
+            (keyup)="focusNext($event,3)"
+            maxlength="1"
+            formControlName="third"
+            #third
+            type="tel"
+            placeholder=""
+          />
+          <input
+            class="nk-otp-box"
+            tabindex="4"
+            (keyup)="focusNext($event,4)"
+            maxlength="1"
+            formControlName="four"
+            #four
+            type="tel"
+            placeholder=""
+          />
+        </div>
+        <ion-text class="text-content1"
+          >Resend OTP ? <span id="time"></span>
+          <span *ngIf="showClick === true" class="clickhere" (click)="resendOTP(state)"> Click Here</span>
+        </ion-text>
+        <app-nk-button
+          #singUp
+          [disabled]="!otpForm?.valid"
+          shape="round"
+          expand="block"
+          class="prime-btn"
+          (onClick)="signUP(state)"
+          >SignUp</app-nk-button
+        >
+      </div>
+    </div>
+  </ng-container>
+</ion-content>

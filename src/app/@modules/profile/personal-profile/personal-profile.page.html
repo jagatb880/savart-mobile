@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Personal Profile</div>
+    <ng-container *ngIf="isEditable === true ; else editable">
+      <ion-icon (click)="setEditable()" class="editIcon" slot="end" name="close-outline"></ion-icon>
+    </ng-container>
+  </ion-toolbar>
+</ion-header>
+<ng-template #editable>
+  <ion-icon (click)="setEditable()" class="editIcon" name="create-outline" slot="end"></ion-icon>
+</ng-template>
+
+<ion-content class="ion-padding">
+  <div class="" [formGroup]="profileForm">
+    <ng-container formArrayName="custProfile">
+      <div *ngFor="let profile of getProfiles().controls; let i=index" [formGroupName]="i">
+        <app-dynamic-input
+          [isFirstDisabled]="i===0"
+          [disabled]="isEditable === false"
+          [formGroup]="profile"
+          [inputType]="profile?.get('profqtype')?.value"
+          [label]="profile?.get('profqname')?.value"
+          [values]="profile?.get('values')?.value"
+          [order]="profile?.get('profqorder')?.value"
+          [fieldset]="profile?.get('profqname')?.value + profile?.get('profqorder')?.value"
+          formControlName="custresponse"
+        ></app-dynamic-input>
+      </div>
+    </ng-container>
+    <div class="ion-padding">
+      <ion-button expand="block" [disabled]="isEditable === false" shape="round" (click)="submitProfile()"
+        >submit</ion-button
+      >
+    </div>
+  </div>
+</ion-content>

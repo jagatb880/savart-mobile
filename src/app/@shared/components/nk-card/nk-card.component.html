@@ -1,0 +1,28 @@
+<div
+  class="nk-card"
+  [ngStyle]="{
+    border: isSelected === true ? '1px solid #512DA8' : 'none',
+    background: background === true ? '#ffffff' : 'url(../../../../assets/image/background.png)',
+    'box-shadow': background === true ? '0px 0px 6px #00000040' : 'unset'
+  }"
+>
+  <div *ngIf="disabled" class="disabled"></div>
+  <!-- <div class="nk-card-background" *ngIf="background">
+    <ion-img src="../../../../assets/image/background.png"></ion-img>
+  </div> -->
+  <div class="nk-content">
+    <ng-template [ngIf]="background === false">
+      <div class="nk-icon">
+        <ion-icon [src]="'../../../../assets/icon/' + icon + '.svg'"></ion-icon>
+      </div>
+      <div class="nk-body">{{ label }}</div>
+    </ng-template>
+
+    <ng-template [ngIf]="background === true">
+      <div class="nk-icon">
+        <ion-icon [src]="icon"></ion-icon>
+      </div>
+      <div class="nk-body1">{{ label }}</div>
+    </ng-template>
+  </div>
+</div>

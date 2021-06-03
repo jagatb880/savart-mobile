@@ -1,0 +1,200 @@
+<ng-container *ngIf="label">
+  <div class="dynamic-label">
+    <ng-template [ngIf]="isOrder"> {{ order }}. </ng-template>
+    {{ label }}
+    <ng-template [ngIf]="inputType == 'F'"> (INR) </ng-template>
+
+  </div>
+</ng-container>
+
+<div [ngSwitch]="inputType">
+  <div *ngSwitchCase="'E'">
+    <ng-container
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
+    >
+    </ng-container>
+    <app-nk-text
+      [disabled]="disabled || isFirstDisabled"
+      [formGroup]="formGroup"
+      [value]="formGroup?.controls?.custresponse?.value"
+      type="text"
+      (input)="onChange($event?.target?.value)"
+    ></app-nk-text>
+  </div>
+
+  <div *ngSwitchCase="'B'">
+    <ng-container
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
+    >
+    </ng-container>
+    <app-nk-toggle
+      [disabled]="disabled"
+      [value]="formGroup?.controls?.custresponse?.value"
+      [formGroup]="formGroup"
+      type="text"
+      (ionChange)="onChange($event?.detail?.checked)"
+    ></app-nk-toggle>
+  </div>
+
+  <!-- TODO : TYPE number changed to tel based on Savart Team Requirement : 26-10-2020 -->
+  <div *ngSwitchCase="'F'">
+    <ng-container
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
+    >
+    </ng-container>
+    
+    <app-nk-text
+      [disabled]="disabled"
+      [value]="formGroup?.controls?.custresponse?.value"
+      type="tel"
+      (input)="allowNumberOnly($event)"
+      (ionChange)="allowNumberOnly($event)"
+    ></app-nk-text>
+    <!-- <ion-input
+      [value]="formGroup?.controls?.custresponse?.value"
+      [disabled]="disabled"
+      (input)="allowNumberOnly($event)"
+      class="dynamic-input"
+      type="tel"
+    ></ion-input> -->
+    <!-- onkeypress="allowNumberOnly(event)" -->
+  </div>
+
+  <div *ngSwitchCase="'Y'">
+    <ng-container
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
+    >
+    </ng-container>
+    <!-- <app-nk-text
+      [disabled]="disabled"
+      [value]="formGroup?.controls?.custresponse?.value"
+      type="date"
+      (input)="onChange($event?.target?.value)"
+      ></app-nk-text> -->
+    <ion-input
+      [disabled]="disabled"
+      (input)="onChange($event?.target?.value)"
+      class="dynamic-input"
+      type="text"
+      [value]="formGroup?.controls?.custresponse?.value"
+      appMask="**/**/****"
+      placeholder="DD/MM/YYYY"
+    ></ion-input>
+  </div>
+
+  <div *ngSwitchCase="'G'">
+    <ng-container
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
+    >
+    </ng-container>
+    <app-nk-text
+      [disabled]="disabled"
+      [value]="formGroup?.controls?.custresponse?.value"
+      type="email"
+      (input)="onChange($event?.target?.value)"
+    ></app-nk-text>
+  </div>
+
+  <div *ngSwitchCase="'RT'">
+    <ng-container
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
+    >
+    </ng-container>
+    <ng-container *ngIf="values?.length > 0; else RTvalues">
+      <app-nk-single-select
+        [disabled]="disabled"
+        [value]="formGroup?.controls?.custresponse?.value"
+        (ionChange)="onChanged($event?.target?.value || $event?.detail?.value)"
+        [list]="values"
+      ></app-nk-single-select>
+    </ng-container>
+    <ng-template #RTvalues>
+      <app-nk-text
+        [disabled]="disabled"
+        [value]="formGroup?.controls?.custresponse?.value"
+        type="text"
+        (input)="onChange($event?.target?.value)"
+      ></app-nk-text>
+    </ng-template>
+  </div>
+
+  <div *ngSwitchCase="'RN'">
+    <ng-container
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
+    >
+    </ng-container>
+    <ng-container *ngIf="values?.length > 0; else RNvalues">
+      <app-nk-single-select
+        [disabled]="disabled"
+        [value]="formGroup?.controls?.custresponse?.value"
+        (ionChange)="onChanged($event?.target?.value || $event?.detail?.value)"
+        [list]="values"
+      ></app-nk-single-select>
+    </ng-container>
+    <ng-template #RNvalues>
+      <app-nk-text
+        [disabled]="disabled"
+        [value]="formGroup?.controls?.custresponse?.value"
+        type="number"
+        (input)="onChange($event?.target?.value)"
+      ></app-nk-text>
+    </ng-template>
+  </div>
+
+  <div *ngSwitchCase="'S'">
+    <ng-container
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
+    >
+    </ng-container>
+
+    <app-nk-radio
+      [disabled]="disabled"
+      [value]="formGroup?.controls?.custresponse?.value"
+      (ionChange)="onChange($event?.target?.value)"
+      [values]="values"
+      [order]="order"
+      [fieldset]="label + order"
+    ></app-nk-radio>
+  </div>
+
+  <div *ngSwitchCase="'M'">
+    <ng-container
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
+    >
+    </ng-container>
+    <app-nk-single-select
+      [disabled]="disabled"
+      [value]="formGroup?.controls?.custresponse?.value"
+      (ionChange)="onChanged($event?.target?.value || $event?.detail?.value)"
+      [list]="values"
+    ></app-nk-single-select>
+  </div>
+
+  <div *ngSwitchDefault></div>
+</div>
+
+<ng-template #errortemplate>
+  <ul class="has-error" *ngIf="!formGroup?.controls?.custresponse?.valid && formGroup?.controls?.custresponse?.dirty">
+    <li
+      *ngIf="
+        !formGroup?.controls?.custresponse?.valid &&
+        formGroup?.controls?.custresponse?.dirty &&
+        formGroup?.controls?.custresponse?.errors?.required
+      "
+    >
+      This field is required or not valid
+    </li>
+    <li *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.errors?.validateEmail">
+      Please enter valid email
+    </li>
+    <li *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.errors?.maxlength">
+      Max length should be 10
+    </li>
+
+    <li
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.errors?.validateOnlyNumber"
+    >
+      Please enter valid number
+    </li>
+  </ul>
+</ng-template>

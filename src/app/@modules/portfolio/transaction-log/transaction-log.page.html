@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Transaction Log</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="radio">
+    <ion-label class="head-label">Transaction Log</ion-label>
+    <ion-radio-group  mode="md" [(ngModel)]="radioValue">
+      <div class="radio-area">
+        <ion-item lines="none">
+          <ion-radio slot="start" value="All"></ion-radio>
+          <ion-label>All</ion-label>
+        </ion-item>
+      </div>
+      <div class="radio-area">
+        <ion-item lines="none">
+          <ion-radio slot="start" value="Services"></ion-radio>
+          <ion-label>Services</ion-label>
+        </ion-item>
+      </div>
+      <div class="radio-area">
+        <ion-item lines="none">
+          <ion-radio slot="start" value="Investment"></ion-radio>
+          <ion-label>Investment</ion-label>
+        </ion-item>
+      </div>
+    </ion-radio-group>
+  </div>
+  <div class="table-area ion-top-padding">
+    <table class="transaction-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Company</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-template [ngIf]="radioValue === 'All'">
+          <tr *ngFor="let item of transactionList;let i = index">
+            <td>{{i+1}}.</td>
+            <td class="link" (click)="goToTransactionDetail(item)">{{item?.service_name || item?.asset}}</td>
+            <td>{{item?.date_subscribed || item?.transdt | date:'dd-MM-yyyy'}}</td>
+          </tr>
+        </ng-template>
+        <ng-template [ngIf]="radioValue === 'Investment'">
+          <tr *ngFor="let item of transactionUIList[0];let i = index">
+            <td>{{i+1}}.</td>
+            <td class="link" (click)="goToTransactionDetail(item)">{{item?.service_name || item?.asset}}</td>
+            <td>{{item?.date_subscribed || item?.transdt | date:'dd-MM-yyyy'}}</td>
+          </tr>
+        </ng-template>
+        <ng-template [ngIf]="radioValue === 'Services'">
+          <tr *ngFor="let item of transactionUIList[1];let i = index">
+            <td>{{i+1}}.</td>
+            <td class="link" (click)="goToTransactionDetail(item)">{{item?.service_name || item?.asset}}</td>
+            <td>{{item?.date_subscribed || item?.transdt | date:'dd-MM-yyyy'}}</td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+  </div>
+</ion-content>

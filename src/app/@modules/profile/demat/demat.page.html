@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Demat Account</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="demant-card" [formGroup]="dematForm">
+    <div class="disclaimer">
+      Savart may or may not be associated with the broker that you choose. We are not responsible for any support,
+      liability and requirements arising out of the trades with the broker.
+    </div>
+    <div class="disabeld" *ngIf="isDisabled"></div>
+    <ng-container formArrayName="data">
+      <ion-row>
+        <ion-col>
+          <div *ngFor="let profile of getDemat().controls; let i=index" [formGroupName]="i">
+            <app-dynamic-input
+              *ngIf="i===0"
+              [formGroup]="profile"
+              [inputType]="profile?.get('profqtype')?.value"
+              [label]="profile?.get('profqname')?.value"
+              [values]="profile?.get('values')?.value"
+              [order]="profile?.get('profqorder')?.value"
+              [fieldset]="profile?.get('profqname')?.value + profile?.get('profqorder')?.value"
+              formControlName="custresponse"
+            ></app-dynamic-input>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+
+    <ng-template [ngIf]="getDemat().length >0">
+      <!-- <ng-container *ngIf="getDemat().controls[0].get('custresponse').value !== true">
+        <div class="borker-label">No problem, Here is the list of some good brokers who can help you out</div>
+        <ng-container *ngFor="let item of brokerListUrl;let i = index">
+          <ng-container *ngIf="item?.brokerList?.length >0">
+            <div class="sercountry">
+              <img
+                class="country-img"
+                [src]=" item?.flag ? item?.flag:'https://restcountries.eu/data/ind.svg' | imagesafe"
+              />
+              <div class="country-name">{{item?.name}}</div>
+            </div>
+
+            <ion-row>
+              <ion-col size="6" *ngFor="let item1 of item?.brokerList;let j = index">
+                <div class="broker-list ripple-parent" (click)="openBrowser(item1?.broker_url)">
+                  <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+                  {{item1?.broker_name}}
+                </div>
+              </ion-col>
+            </ion-row>
+          </ng-container>
+        </ng-container>
+      </ng-container> -->
+
+      <ng-container
+        [formGroup]="dematForm"
+        *ngIf="getDemat().controls[2] && getDemat().controls[0].get('custresponse').value !== true"
+      >
+        <ion-row formArrayName="data">
+          <ion-col size="12" formGroupName="2">
+            <app-dynamic-input
+              [formGroup]="getDemat()?.controls[2]"
+              [inputType]="getDemat()?.controls[2]?.get('profqtype')?.value"
+              [label]="getDemat()?.controls[2]?.get('profqname')?.value"
+              [values]="getDemat()?.controls[2]?.get('values')?.value"
+              [order]="getDemat()?.controls[2]?.get('profqorder')?.value"
+              [fieldset]="getDemat()?.controls[2]?.get('profqname')?.value + getDemat()?.controls[2]?.get('profqorder')?.value"
+              formControlName="custresponse"
+            ></app-dynamic-input>
+          </ion-col>
+        </ion-row>
+        <ion-row
+          *ngIf="getDemat().controls[2] && getDemat().controls[2].get('custresponse').value === true"
+          formArrayName="data"
+        >
+          <ion-col size="12" [formGroupName]="getDemat().length-1">
+            <app-dynamic-input
+              [formGroup]="getDemat()?.controls[getDemat().length-1]"
+              [inputType]="getDemat()?.controls[getDemat().length-1]?.get('profqtype')?.value"
+              [label]="getDemat()?.controls[getDemat().length-1]?.get('profqname')?.value"
+              [values]="getDemat()?.controls[getDemat().length-1]?.get('values')?.value"
+              [order]="getDemat()?.controls[getDemat().length-1]?.get('profqorder')?.value"
+              [fieldset]="getDemat()?.controls[getDemat().length-1]?.get('profqname')?.value + getDemat()?.controls[2]?.get('profqorder')?.value"
+              formControlName="custresponse"
+            ></app-dynamic-input>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+
+      <ng-container
+        [formGroup]="dematForm"
+        *ngIf="getDemat().controls[1] && getDemat().controls[0].get('custresponse').value === true"
+      >
+        <ion-row formArrayName="data">
+          <ion-col size="12" formGroupName="1">
+            <app-dynamic-input
+              [formGroup]="getDemat()?.controls[1]"
+              [inputType]="getDemat()?.controls[1]?.get('profqtype')?.value"
+              [label]="getDemat()?.controls[1]?.get('profqname')?.value"
+              [values]="getDemat()?.controls[1]?.get('values')?.value"
+              [order]="getDemat()?.controls[1]?.get('profqorder')?.value"
+              [fieldset]="getDemat()?.controls[1]?.get('profqname')?.value + getDemat()?.controls[1]?.get('profqorder')?.value"
+              formControlName="custresponse"
+            ></app-dynamic-input>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+    </ng-template>
+
+    <div class="ion-padding">
+      <ion-button [disabled]="isDisabled" expand="block" shape="round" (click)="submitDemat()">submit</ion-button>
+    </div>
+  </div>
+</ion-content>

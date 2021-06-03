@@ -1,0 +1,40 @@
+.inbox-area {
+  border-bottom: 1px solid #a0a0a3;
+  padding: 16px 10px;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .subject {
+      color: #4d4d4d;
+      font-size: 20px;
+      text-align: center;
+      font-family: Roboto-Regular;
+      text-transform: capitalize;
+      max-width: 250px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .date {
+      color: #4d4d4d;
+      font-size: 14px;
+      opacity: 0.9;
+      font-family: Roboto-Regular;
+    }
+  }
+  .body {
+    color: #8c8989;
+    font-size: 14px;
+    font-family: Roboto-Regular;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-top: 5px;
+  }
+}
+
+.inbox-area.opened {
+  color: #a0a0a3;
+  opacity: 0.6;
+}

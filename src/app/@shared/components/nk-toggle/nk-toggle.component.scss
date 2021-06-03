@@ -1,0 +1,32 @@
+ion-toggle {
+  width: 90px;
+  height: 35px;
+  --background: #864bd6;
+  --background-checked: #41cb04;
+  --handle-background: #ffffff;
+  --handle-background-checked: #ffffff;
+  --handle-width: 35px;
+  --handle-height: 35px;
+  --border-radius: 53px;
+  --handle-box-shadow: 0px 3px 6px #00000029;
+}
+
+ion-toggle::before {
+  position: absolute;
+  top: 23px;
+  left: 25px;
+  content: "YES";
+  color: #ffffff;
+  font-size: 12px;
+  z-index: 1;
+}
+
+ion-toggle::after {
+  position: absolute;
+  top: 23px;
+  right: 30px;
+  content: "NO";
+  color: #ffffff;
+  font-size: 12px;
+  z-index: 1;
+}

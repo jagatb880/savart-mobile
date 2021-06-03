@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Tools</ion-title>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <app-nk-card label="SIP Calculator" (click)="navigate('/tabs/tab5/sip')" icon="SIP Calculator"></app-nk-card>
+    <app-nk-card
+      label="Lumpsum Calculator"
+      (click)="navigate('/tabs/tab5/lumpsum')"
+      icon="Lumpsum Calculator"
+    ></app-nk-card>
+    <!-- <app-nk-card label="Screener" (click)="navigate('/tabs/tab5/screener')" icon="Screener"></app-nk-card>
+    <app-nk-card label="Watch List" (click)="navigate('/tabs/tab5/watchlist')" icon="Watch List"></app-nk-card> -->
+  </div>
+</ion-content>

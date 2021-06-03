@@ -1,0 +1,7 @@
+{
+  "name": "savart",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

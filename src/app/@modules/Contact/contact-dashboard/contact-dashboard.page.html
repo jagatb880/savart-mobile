@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Contact Us</ion-title>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <app-nk-card label="FAQ" (click)="navigate('/tabs/tab4/faq')" icon="Faq"></app-nk-card>
+    <app-nk-card label="Call us" (click)="dialPad()" icon="Call us"></app-nk-card>
+    <app-nk-card label="Email us" (click)="navigate('/tabs/tab4/emailus')" icon="Email us"></app-nk-card>
+    <app-nk-card label="Chat with us" (click)="chatInapp()" icon="Chat with us"></app-nk-card>
+    <!-- <app-nk-card label="Chat with us" (click)="navigate('/tabs/tab4/chatwithus')" icon="Chat with us"></app-nk-card> -->
+  </div>
+</ion-content>

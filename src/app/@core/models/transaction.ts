@@ -1,0 +1,52 @@
+export const Transaction = {
+  data: [
+    [
+      {
+        transdt: "September-21-2020",
+        asset: "3M India Ltd.",
+        transtype: "B",
+        qty: 121,
+        rate: 12,
+        status: "",
+        inv_amount: 1452,
+        transorgin: "MF",
+        transexchange: "NSE",
+      },
+      {
+        transdt: "September-21-2020",
+        asset: "20 Microns Ltd.",
+        transtype: "S",
+        qty: 12,
+        rate: 1012,
+        status: "",
+        inv_amount: 12144,
+        transorgin: "E",
+        transexchange: "BSE",
+      },
+      {
+        transdt: "September-17-2020",
+        asset: "20 Microns Ltd.",
+        transtype: "S",
+        qty: 10,
+        rate: 12212,
+        status: "",
+        inv_amount: 122120,
+        transorgin: "E",
+        transexchange: "BSE",
+      },
+    ],
+    [
+      {
+        sercountry: "India",
+        service_name: "Advisory plan-A",
+        paid_amount: 2499,
+        date_subscribed: "September-04-2020",
+        service_type: "Advisory",
+        service_status: "A",
+        subscription_status: "A",
+      },
+    ],
+  ],
+  error: null,
+  statusCode: 0,
+};

@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Set a Goal</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="goal-card">
+    <div class="header">
+      <div class="header-content">
+        <!-- <ion-icon
+          *ngIf="goalForm?.controls?.goalicon1?.value"
+          [src]="'../../../../assets/icon/'+ goalForm?.controls?.goalicon1?.value"
+        ></ion-icon> -->
+        <ion-icon *ngIf="goalForm?.controls?.goalicon2?.value" [src]="goalForm?.controls?.goalicon2?.value"></ion-icon>
+        <div class="content">{{goalForm?.controls?.goalname?.value}}</div>
+        <ion-icon
+          *ngIf="goalForm?.controls?.isSelected?.value"
+          (click)="presentAlertConfirm()"
+          class="del"
+          name="trash-outline"
+        ></ion-icon>
+      </div>
+    </div>
+    <div class="content">
+      <div class="text-content">Select time period 3 Years to 25 Years</div>
+      <div class="roundslide">
+        <div class="slider_area">
+          <div class="slider-circle-area">
+            <div id="slider" class="rslider"></div>
+          </div>
+        </div>
+      </div>
+      <div class="amt-area" [formGroup]="goalForm">
+        <div class="label">Goal Target Amount</div>
+        <app-nk-text type="tel" [commoa]="true" placeholder="Ex:5000" formControlName="goaltargetamount"></app-nk-text>
+        <div class="btn-area">
+          <ion-button (click)="cancel()" shape="round" class="btn-hollow">Cancel</ion-button>
+          <ion-button (click)="submit()" [disabled]="!goalForm?.valid" shape="round">Submit</ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

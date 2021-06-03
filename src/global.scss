@@ -1,0 +1,243 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+@font-face {
+  font-family: Roboto-Medium;
+  src: url(assets/fonts/Roboto/Roboto-Medium.ttf);
+}
+
+@font-face {
+  font-family: Roboto-Black;
+  src: url(assets/fonts/Roboto/Roboto-Black.ttf);
+}
+
+@font-face {
+  font-family: Roboto-Thin;
+  src: url(assets/fonts/Roboto/Roboto-Thin.ttf);
+}
+
+@font-face {
+  font-family: Roboto-Regular;
+  src: url(assets/fonts/Roboto/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: Roboto-Bold;
+  src: url(assets/fonts/Roboto/Roboto-Bold.ttf);
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.page-center {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.nk-input {
+  border: 0.22px solid #45707070;
+}
+
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+
+ion-header {
+  ion-toolbar {
+    --min-height: 82px;
+    --background: transparent;
+    background-image: url(./assets/image/background.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-position: top;
+    color: white;
+    height: 100%;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    box-shadow: 0px 3px 6px #00000029;
+
+    .header-title {
+      font-size: 22px;
+      color: white;
+      font-family: "Roboto-Medium";
+      text-align: center;
+      padding: 0px 20px;
+    }
+    .end-icon {
+      padding: 0px 20px;
+    }
+  }
+}
+
+.header-md::after,
+.header-ios::after {
+  display: none;
+}
+
+.toolbar-title {
+  white-space: pre-wrap !important;
+  text-align: center;
+}
+
+#slider .rs-tooltip {
+  font-size: 13px;
+}
+
+#slider .rs-range-color {
+  background-color: #dfd4ef;
+}
+#slider .rs-bg-color {
+  background-color: #8a6edd;
+  border: 6px solid white !important;
+}
+#slider .rs-path-color {
+  background-color: #dfd4ef;
+}
+#slider .rs-overlay {
+  display: none;
+}
+#slider .rs-handle {
+  background-color: #8a6edd;
+  margin: 5px;
+}
+#slider .rs-tooltip-text {
+  color: white;
+  margin-top: -7.5px !important;
+  margin-left: -22.2864px !important;
+  background-color: #8a6edd;
+  font-family: Roboto-Medium;
+}
+#slider .rs-border {
+  border: none;
+}
+
+.has-error {
+  margin: 4px 0px;
+  padding: 5px 16px;
+  font-size: 14px;
+  font-family: Roboto-Medium;
+  font-family: Roboto-Regular;
+  color: red;
+  li {
+    padding: 5px 0px;
+    margin-left: 5px;
+  }
+}
+
+// #Tb94IJL-1601736336577 {
+//   display: none !important;
+// }
+#tawkchat-minified-wrapper {
+  display: none !important;
+}
+
+.toast-success {
+  .toast-container {
+    background: green;
+    color: white;
+    text-transform: lowercase;
+    font-family: Roboto-Regular;
+  }
+}
+
+.toast-error {
+  .toast-container {
+    background: red;
+    color: white;
+    font-family: Roboto-Regular;
+    text-transform: lowercase;
+  }
+}
+
+.toast-md .toast-message {
+  text-transform: lowercase;
+  color: white;
+}
+
+.alert-radio-label.sc-ion-alert-md,
+.alert-radio-label.sc-ion-alert-ios {
+  white-space: pre-wrap !important;
+}
+
+ion-button.btn-hollow {
+  --background: white;
+  background: white !important;
+  color: #8a6edd !important;
+}
+
+.wd-100 {
+  width: 100%;
+}
+
+ion-back-button {
+  --color: white;
+  color: white;
+}
+
+.my-custom-class-modal {
+  // height: 50% !important;
+  // top: calc(100vh - 50%) !important;
+  --background: transparent !important;
+  app-upgrade {
+    top: calc(100vh - 50%) !important;
+  }
+}
+
+.my-custom-class {
+  // --backdrop-opacity: 0.2;
+  // --background: linear-gradient(90deg, rgb(210,224,253) 1%, rgb(122,162,249) 100%);
+  .alert-head.sc-ion-alert-md {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      background: url(../src/assets/image/background.png);
+      box-shadow: unset;
+  }
+  .alert-title.sc-ion-alert-md {
+      color: var(--ion-text-color, #fff);
+  }
+
+  .alert-head.sc-ion-alert-md+.alert-message.sc-ion-alert-md {
+      padding-top: 10px;
+      color: black;
+  }
+}

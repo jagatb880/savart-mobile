@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Upload Portfolio</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="upload-card">
+    <div>Please upload your portfolio to either track your or receive advice from our experts</div>
+    <div class="upload-icon">
+      <ion-icon src="../../../../assets/icon/upload.svg"></ion-icon>
+    </div>
+    <div class="upload-button">
+      <input
+        type="file"
+        name="upload-porfolio"
+        accept=".pdf,.xls,.xlsx,.doc,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        (change)="handleChange($event)"
+        style="display: none"
+        id="upload-porfolio"
+      />
+      <ion-button shape="round" expand="block" (click)="browse()" [disabled]="portfolioStatus">browse</ion-button>
+    </div>
+  </div>
+  <div class="disclaimer" *ngIf="portfolioStatus">
+    NOTE : Your request is in process. New request will be allowed only after you receive the advice from our advisors.
+  </div>
+  <div class="file-list-card" *ngFor="let item of fileList">
+    <div class="file-area">
+      <ion-icon name="document-outline"></ion-icon>
+      <div class="filename">{{item?.docfilename}}</div>
+    </div>
+    <div class="success">
+      <ion-icon
+        *ngIf="!item.docstatus"
+        name="trash-outline"
+        style="color: red"
+        (click)="deletePortfolio(item)"
+      ></ion-icon>
+      <ion-icon *ngIf="item.docstatus" name="checkmark-circle-outline"></ion-icon>
+    </div>
+    <!-- <div class="error">
+      <ion-icon name="close-circle-outline"></ion-icon>
+    </div> -->
+  </div>
+  <div class="btn-area" *ngIf="fileList?.length >0">
+    <div class="checkarea">
+      <ion-checkbox [(ngModel)]="tracking"></ion-checkbox>
+      <div class="name">For tracking</div>
+    </div>
+  </div>
+  <ion-button [disabled]="fileList?.length <=0 " shape="round" expand="block" (click)="submitReview()"
+    >Send for review</ion-button
+  >
+</ion-content>

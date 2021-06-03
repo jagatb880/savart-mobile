@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <div class="" slot="start"></div> -->
+    <ion-title>Profile</ion-title>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <app-nk-card label="Services" (click)="navigate('tabs/tab1/profile-service')" icon="Services"></app-nk-card>
+    <app-nk-card label="Change Password" (click)="navigate('/set-your-password')" icon="Change password"></app-nk-card>
+    <app-nk-card
+      [disabled]="getExpired$ |async"
+      label="Personal Profile"
+      (click)="navigate1('tabs/tab1/personal-profile')"
+      icon="Personal Profile"
+    ></app-nk-card>
+    <app-nk-card
+      [disabled]="getExpired$ |async"
+      label="Investment Profile"
+      (click)="navigate1('tabs/tab1/investment-profile')"
+      icon="Investment Profile"
+    ></app-nk-card>
+    <app-nk-card
+      [disabled]="getExpired$ |async"
+      label="Demat"
+      (click)="navigate1('tabs/tab1/demat')"
+      icon="Demat"
+    ></app-nk-card>
+  </div>
+</ion-content>

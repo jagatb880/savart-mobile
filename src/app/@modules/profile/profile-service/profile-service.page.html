@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Savart Advisory & Nirvana Services</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <ng-container [formGroup]="subscriptionForm">
+      <ng-container formArrayName="countries">
+        <div *ngFor="let profile of getCountrylistData().controls; let i=index" [formGroupName]="i">
+          <div class="sercountry" *ngIf="profile?.get('isFlag')?.value">
+            <img class="country-img" [src]="profile?.get('flag')?.value | imagesafe" />
+            <div class="country-name">{{profile?.get("countryName")?.value}}</div>
+          </div>
+
+          <ng-container formArrayName="services">
+            <ng-container
+              *ngFor="let service of getCountrySubscriptionData(i).controls; let j=index"
+              [formGroupName]="j"
+            >
+              <app-nk-subs-card
+                (inputPriceEmit)="inputPriceEmit(i,j,$event)"
+                (selectedButton)="selectedButton(i,j,$event)"
+                (upgradeButton)="upgradeButton(i,j,$event)"
+                class=""
+                [profile]="service"
+                [planUpgrad]="profile?.get('planUpgraded')?.value"
+              ></app-nk-subs-card>
+            </ng-container>
+          </ng-container>
+        </div>
+      </ng-container>
+    </ng-container>
+    <ng-template [ngIf]="selectedPlanArray?.length>0">
+      <div class="selected-plan-cards">
+        <div class="header">Selected Plans</div>
+        <div class="plans" *ngFor="let item of selectedPlanArray;let i = index;">{{i+1}}. {{item?.plans}}</div>
+      </div>
+    </ng-template>
+    <div class="terms-area">
+      <ion-checkbox [(ngModel)]="isChecked" (ionChange)="onChecked($event)"> </ion-checkbox>
+      <span class="terms-label">
+        Agree and Proceed for
+        <span class="terms" (click)="termsAndCondition()">terms and conditions</span>
+      </span>
+    </div>
+    <ion-button
+      [disabled]="selectedPlanArray?.length<=0 || isChecked === false"
+      shape="round"
+      expand="block"
+      (click)="proceedToPayment()"
+      >Proceed to Payment</ion-button
+    >
+  </div>
+</ion-content>

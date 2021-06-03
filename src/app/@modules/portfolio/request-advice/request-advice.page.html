@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Request Advice</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="request-advice-card" [formGroup]="adviceForm">
+    <div class="header">Request Advice</div>
+    <div class="content">
+      <div class="label">Investment</div>
+      <app-nk-text
+        formControlName="investment_amount"
+        type="tel"
+        [commoa]="true"
+        placeholder="Please Enter The Investment Amount"
+      ></app-nk-text>
+      <div class="radio">
+        <ion-radio-group  mode="md" formControlName="investmemnt_mode">
+          <div class="radio-area">
+            <ion-radio slot="start" value="One time"></ion-radio>
+            <ion-label>Custom</ion-label>
+          </div>
+          <div class="radio-area">
+            <ion-radio slot="start" value="Monthly"></ion-radio>
+            <ion-label>Monthly</ion-label>
+          </div>
+        </ion-radio-group>
+      </div>
+      <ion-row class="tax-area">
+        <ion-col size="6">
+          <app-nk-single-select
+            *ngIf="adviceForm?.controls?.investmemnt_mode?.value === 'Monthly'"
+            formControlName="investment_monthDate"
+            placeholder="Select Date"
+            [list]="MonthDate"
+          ></app-nk-single-select>
+        </ion-col>
+        <ion-col size="6" class="toggle">
+          <ion-toggle mode="md" formControlName="investment_req_invtype"></ion-toggle>
+        </ion-col>
+      </ion-row>
+      <div class="label">Comment</div>
+      <ion-textarea 
+      formControlName="comment" class="textarea-input "
+      type="text" placeholder="Please Enter The Comment"></ion-textarea>
+      <div class="btn-area">
+        <ion-button (click)="cancel()" shape="round" class="btn-hollow">Cancel</ion-button>
+        <ion-button (click)="submit()" [disabled]="!adviceForm?.valid" shape="round">Submit</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

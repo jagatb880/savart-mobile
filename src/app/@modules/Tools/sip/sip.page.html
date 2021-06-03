@@ -1,0 +1,115 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">SIP Calculator</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [formGroup]="sipForm">
+  <div class="inputs">
+    <ul *ngIf="sipForm?.controls?.investment?.dirty && sipForm?.controls?.investment?.invalid" class="has-error">
+      <li *ngIf="sipForm?.controls?.investment?.dirty && sipForm?.controls?.investment?.errors?.required">
+        This field is required
+      </li>
+      <li *ngIf="sipForm?.controls?.investment?.dirty && sipForm?.controls?.investment?.errors?.min?.min">
+        Investment amount should be minimum 1000
+      </li>
+      <li *ngIf="sipForm?.controls?.investment?.dirty && sipForm?.controls?.investment?.errors?.max?.max">
+        Investment amount should be minimum 10000
+      </li>
+    </ul>
+    <ion-label>SIP investment</ion-label>
+    <ion-input
+      type="number"
+      min="1000"
+      max="10000"
+      placeholder="Enter the investment Amount"
+      formControlName="investment"
+    ></ion-input>
+  </div>
+
+  <div class="inputs">
+    <ion-label>Select SIP</ion-label>
+    <ion-radio-group mode="md" formControlName="selectSIP">
+      <div class="radio-area">
+        <ion-item lines="none">
+          <ion-radio slot="start" value="Monthly"></ion-radio>
+          <ion-label>Monthly</ion-label>
+        </ion-item>
+      </div>
+      <div class="radio-area">
+        <ion-item lines="none">
+          <ion-radio slot="start" value="Quarterly"></ion-radio>
+          <ion-label>Quarterly</ion-label>
+        </ion-item>
+      </div>
+      <div class="radio-area">
+        <ion-item lines="none">
+          <ion-radio slot="start" value="Half yearly"></ion-radio>
+          <ion-label>Half yearly</ion-label>
+        </ion-item>
+      </div>
+    </ion-radio-group>
+  </div>
+
+  <div class="inputs">
+    <ul *ngIf="sipForm?.controls?.expectedRate?.dirty && sipForm?.controls?.expectedRate?.invalid" class="has-error">
+      <li *ngIf="sipForm?.controls?.expectedRate?.dirty && sipForm?.controls?.expectedRate?.errors?.required">
+        This field is required
+      </li>
+      <li *ngIf="sipForm?.controls?.expectedRate?.dirty && sipForm?.controls?.expectedRate?.errors?.min?.min">
+        Expected Rate amount should be minimum 0
+      </li>
+      <li *ngIf="sipForm?.controls?.expectedRate?.dirty && sipForm?.controls?.expectedRate?.errors?.max?.max">
+        Expected Rate amount should be minimum 100
+      </li>
+    </ul>
+    <ion-label>Expected Rate of Return (p.a)</ion-label>
+    <ion-input type="number" min="0" max="100" placeholder="Expected Rate" formControlName="expectedRate"></ion-input>
+  </div>
+  <div class="inputs">
+    <ul *ngIf="sipForm?.controls?.noOfYears?.dirty && sipForm?.controls?.noOfYears?.invalid" class="has-error">
+      <li *ngIf="sipForm?.controls?.noOfYears?.dirty && sipForm?.controls?.noOfYears?.errors?.required">
+        This field is required
+      </li>
+    </ul>
+    <ion-label>Investment Duration (yrs)</ion-label>
+    <ion-input type="number" placeholder="Investment Duration" formControlName="noOfYears"></ion-input>
+  </div>
+
+  <div class="ion-padding">
+    <ion-button shape="round" expand="block" (click)="calculateInvestment(sipForm?.value)">Calculate</ion-button>
+  </div>
+
+  <div *ngIf="isActive===true">
+    <div class="graph" id="sipGraph">
+      <canvas
+        baseChart
+        [datasets]="datasets"
+        [labels]="linelabels"
+        [options]="lineChartOptions"
+        [chartType]="lineChartType"
+        [legend]="true"
+        [style.max-width]="'95%'"
+        [style.min-width]="'95%'"
+      >
+      </canvas>
+    </div>
+
+    <div class="card">
+      <div class="amount">{{totalInvest | number : '1.2-2'}}</div>
+      <div class="label">Total Investment Amount</div>
+    </div>
+    <div class="card">
+      <div class="amount">{{future | number : '1.2-2'}}</div>
+      <div class="label">The future value of your SIP Investment</div>
+    </div>
+    <div class="card">
+      <div class="amount">{{earnings | number : '1.2-2'}}</div>
+      <div class="label">Earning on Investment</div>
+    </div>
+  </div>
+</ion-content>

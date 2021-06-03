@@ -1,0 +1,15 @@
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+
+import { IonicModule } from "@ionic/angular";
+
+import { ContactDashboardPageRoutingModule } from "./contact-dashboard-routing.module";
+
+import { ContactDashboardPage } from "./contact-dashboard.page";
+import { SharedModule } from "@shared/shared.module";
+@NgModule({
+  imports: [CommonModule, FormsModule, IonicModule, SharedModule, ContactDashboardPageRoutingModule],
+  declarations: [ContactDashboardPage],
+})
+export class ContactDashboardPageModule {}

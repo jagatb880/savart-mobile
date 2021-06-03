@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Portfolio Review</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="height: 90%;
+  margin: 20px;
+  background:#7C4ED8;
+  border-radius: 10px;">
+    <div style="margin: 20px;">
+      <ion-list style="background: #7C4ED8;">
+        <ion-row style="margin-top: 20px;">
+          <ion-col size="6" class="heading">Investment <br>Name</ion-col>
+          <ion-col size="6" class="desc">{{porfolioDetails.company_name}}</ion-col>
+        </ion-row>
+        <div class="line-divider"></div>
+        <ion-row>
+          <ion-col size="6" class="heading">Action</ion-col>
+          <ion-col size="6" class="desc">{{porfolioDetails.opinion}}</ion-col>
+        </ion-row>
+        <div class="line-divider"></div>
+        <div style="margin-left: 5px;">
+          <ion-row size="6" class="heading">Reason</ion-row>
+          <ion-row size="6" class="reason">{{porfolioDetails.reason}}</ion-row>
+        </div>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

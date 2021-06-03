@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "266048666059",
+    "firebase_url": "https://savart-mob.firebaseio.com",
+    "project_id": "savart-mob",
+    "storage_bucket": "savart-mob.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266048666059:android:77dc0451f9bed6226b9e4e",
+        "android_client_info": {
+          "package_name": "com.savart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266048666059-qm0ba1gldsaeog1odbua5ev7o1rpi9eg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnHmhbFG4_YQ_z12AcO0BqW06ZF67si40"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266048666059-qm0ba1gldsaeog1odbua5ev7o1rpi9eg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "266048666059-avsgv4qdg0icvqh5q5nnvkj6uad77jg0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.IOS.savart"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Email Us</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [formGroup]="emailForm">
+  <div class="inputs">
+    <ion-label>From: </ion-label>
+    <ion-input class="email-input" formControlName="from" placeholder="From"></ion-input>
+  </div>
+  <div class="inputs">
+    <ion-label>To: </ion-label>
+    <ion-input class="email-input" placeholder="To" value="hi@savart.in" disabled></ion-input>
+  </div>
+  <div class="inputs">
+    <ion-label>Subject: </ion-label>
+    <ion-input class="email-input" formControlName="subject" placeholder="Subject"></ion-input>
+  </div>
+  <div class="inputs">
+    <ion-label>Message: </ion-label>
+    <ion-textarea rows="6" class="email-input" formControlName="html" placeholder="Message"></ion-textarea>
+  </div>
+  <ion-button shape="round" expand="block" class="prime-btn" (click)="submit(emailForm?.value)">Send</ion-button>
+</ion-content>

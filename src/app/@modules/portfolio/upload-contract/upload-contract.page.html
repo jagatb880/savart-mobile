@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Upload Contract</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="upload-card">
+    <div>Upload multiple contract notes, consolidated pdf's or entries in XL doc</div>
+    <div class="upload-icon">
+      <ion-icon src="../../../../assets/icon/upload.svg"></ion-icon>
+    </div>
+    <div class="upload-button">
+      <input
+        type="file"
+        name="upload-contract"
+        accept=".pdf,.xls,.xlsx,.doc,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        (change)="handleChange($event)"
+        style="display: none"
+        id="uploadContract"
+      />
+      <ion-button shape="round" expand="block" (click)="browse()">browse</ion-button>
+    </div>
+  </div>
+  <div class="file-list-card" *ngFor="let item of fileList;let i = index">
+    <div class="file-area">
+      <ion-icon name="document-outline"></ion-icon>
+      <div class="filename">{{item?.docfilename}}</div>
+    </div>
+    <div class="success">
+      <ion-icon
+        *ngIf="!item?.docstatus"
+        style="color: red"
+        name="trash-outline"
+        (click)="deleteContractNotes(item)"
+      ></ion-icon>
+      <ion-icon *ngIf="item?.docstatus" name="checkmark-circle-outline"></ion-icon>
+    </div>
+    <!-- <div class="error">
+      <ion-icon name="close-circle-outline"></ion-icon>
+    </div> -->
+  </div>
+  <ion-button shape="round" expand="block" (click)="contractNotesSubmit()">Submit</ion-button>
+  <div class="btn-area">
+    <div class="checkarea">
+      <!-- <ion-checkbox></ion-checkbox>
+      <div class="name">For tracking only</div> -->
+    </div>
+  </div>
+</ion-content>

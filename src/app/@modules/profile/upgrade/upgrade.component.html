@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="header-title" (click)="back()">
+      Close&nbsp;<ion-icon style="font-size: 24px" name="close"></ion-icon>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding upgrade">
+    <div class="terms-area">
+      <ion-checkbox [(ngModel)]="isChecked" (ionChange)="onChecked($event)"> </ion-checkbox>
+      <span class="terms-label">
+        Agree and Proceed for
+        <span class="terms" (click)="termsAndCondition()">terms and conditions</span>
+      </span>
+    </div>
+    <ion-button [disabled]="isChecked === false" shape="round" expand="block" (click)="upgradeSubscriptionPayments()"
+      >Proceed to Payment</ion-button
+    >
+  </div>
+</ion-content>

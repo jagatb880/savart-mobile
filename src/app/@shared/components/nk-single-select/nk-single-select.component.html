@@ -1,0 +1,17 @@
+<ion-select
+  class="dynamic-input"
+  [placeholder]="placeholder"
+  [interfaceOptions]="interfaceOptions || customAlertOptions"
+  [interface]="interface"
+  [multiple]="multiple"
+  (ionChange)="onChanged($event)"
+  [value]="value"
+  [disabled]="disabled"
+>
+  <ion-select-option
+    *ngFor="let item of list"
+    value="{{ item?.locname || item?.lookupname || item?.broker_name || item?.value || item }}"
+  >
+    {{ item?.locname || item?.displayval || item?.broker_name || item?.label || item }}
+  </ion-select-option>
+</ion-select>

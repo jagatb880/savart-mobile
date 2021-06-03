@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <div class="header-title">Portfolio Review</div>
+    <app-logout slot="end"></app-logout>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="ion-margin" *ngFor="let porfolioAdvice of porfolioAdvices">
+    <!-- <ion-row>
+      <ion-col size="6">Comapny Name</ion-col>
+      <ion-col size="3">Opinion</ion-col>
+      <ion-col size="3">Reason</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let porfolioAdvice of porfolioAdvices">
+      <ion-col size="6">{{ porfolioAdvice.company_name }}</ion-col>
+      <ion-col size="3">{{ porfolioAdvice.opinion }}</ion-col>
+      <ion-col size="3">{{ porfolioAdvice.reason }}</ion-col>
+    </ion-row> -->
+    <ion-row class="portfolio-box" (click)="portfolioAdviceDetails(porfolioAdvice)">
+      <ion-col size="9">{{ porfolioAdvice.company_name }}</ion-col>
+      <ion-col size="3" style="text-align: center;">{{ porfolioAdvice.opinion }}</ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>
