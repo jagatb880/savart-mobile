@@ -10,7 +10,7 @@
           *ngIf="loginForm?.controls?.custregmobile?.dirty && loginForm?.controls?.custregmobile.valid; else errortemplate"
         >
         </ng-container>
-        <ion-item lines="none" class="input_area log-option" [formGroup]="loginForm">
+        <ion-item class="input_area" lines="none" [formGroup]="loginForm">
           <ion-icon name="call-outline"></ion-icon>
           <ion-select
             placeholder="+91"
