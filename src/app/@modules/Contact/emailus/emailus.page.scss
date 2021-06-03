@@ -1,9 +1,11 @@
 .inputs {
+  padding-left: 5px;
   .email-input {
     border: 1px solid #70707063;
     border-radius: 8px;
     background: #cfcece40;
     margin-top: 5px;
+    --padding-start: 10px
   }
 
   margin-top: 10px;
