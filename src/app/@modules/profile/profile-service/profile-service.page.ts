@@ -771,7 +771,7 @@ export class ProfileServicePage implements OnInit, AfterViewChecked, OnDestroy {
     };
 
     // Razorpay.open(
-    Razorpay.open(
+      RazorpayCheckout.open(
           options,
           (payment_id) => {
             this.sendPaymentStatusToServer(data,payment_id)
