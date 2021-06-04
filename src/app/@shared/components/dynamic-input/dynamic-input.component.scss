@@ -26,3 +26,11 @@
   min-height: 43px;
   --padding-start: 10px !important;
 }
+
+.disabled-tag {
+  pointer-events: none !important;
+}
+
+.enabled-tag {
+  pointer-events: all !important;
+}
