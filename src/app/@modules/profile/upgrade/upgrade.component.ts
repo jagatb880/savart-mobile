@@ -195,7 +195,7 @@ export class UpgradeComponent implements OnInit {
 
     this.modalCtrl.dismiss();
     // Razorpay.open(
-    RazorpayCheckout.open(
+    Razorpay.open(
           options,
           (payment_id) => {
             this.sendPaymentStatusToServer(data,payment_id)
