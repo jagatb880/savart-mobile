@@ -10,7 +10,6 @@ import { NavController, ToastController } from "@ionic/angular";
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { LoadingService } from './loading.service';
 import { File } from '@ionic-native/file/ngx';
-import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 import { Platform } from '@ionic/angular';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
@@ -27,7 +26,7 @@ export class CommonService {
   private donwloadProgress = 0;
   public androidPermission: boolean = false;
   constructor(public http: HttpService, private navCtrl: NavController,private fileOpener: FileOpener, private document: DocumentViewer,
-    private loadingSvc: LoadingService, private file: File, private ft: FileTransfer, private toastService: ToastrService,
+    private loadingSvc: LoadingService, private file: File, private toastService: ToastrService,
     private platform: Platform, private androidPermissions: AndroidPermissions, private httpClient: HttpClient) {}
 
   getlookupDetails(body): Observable<any> {

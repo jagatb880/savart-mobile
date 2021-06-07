@@ -19,14 +19,11 @@ import { AngularFireModule } from "@angular/fire";
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-// import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
 import { FirebaseAnalytics } from '@ionic-native/firebase-analytics/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
-import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
-// import { FirebaseMessaging } from '@ionic-native/firebase-messaging/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -52,7 +49,6 @@ import { FCM } from '@ionic-native/fcm/ngx';
     FirebaseAnalytics,
     File,
     DocumentViewer,
-    FileTransfer,
     AndroidPermissions,
     // FirebaseMessaging,
     // FirebaseX,
