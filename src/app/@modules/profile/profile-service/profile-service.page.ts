@@ -266,23 +266,18 @@ export class ProfileServicePage implements OnInit, AfterViewChecked, OnDestroy {
 
 
   checkIfRenewal(date) {
-    var today = new Date();
-    today.setHours(0, 0, 0, 0);
-    let currentDate = moment(today).format("DD-MM-YYYY");
-    let checkDate = new Date(date);
-    let dummy: any = checkDate.setMonth(checkDate.getMonth() - 3);
-    let checkBeforeThreemonthDate = moment(dummy).format("DD-MM-YYYY");
-    return moment(currentDate).isAfter(checkBeforeThreemonthDate);
+    let today = new Date();
+    let currentDate = today.toISOString()
+    let expireDate = date
+    return expireDate < currentDate;
     // return true; // TODO - for testing
   }
 
   checkIsExpired(date) {
-    var today = new Date();
-    today.setHours(0, 0, 0, 0);
-    let currentDate = moment(today).format("DD-MM-YYYY");
-    let checkDate = new Date(date);
-    let checkDate1 = moment(checkDate).format("DD-MM-YYYY");
-    return moment(currentDate).isAfter(checkDate1);
+    let today = new Date();
+    let currentDate = today.toISOString()
+    let expireDate = date
+    return expireDate < currentDate;
     // return true; // TODO - for testing
   }
 
