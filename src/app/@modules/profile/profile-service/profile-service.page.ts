@@ -269,7 +269,7 @@ export class ProfileServicePage implements OnInit, AfterViewChecked, OnDestroy {
     let today = new Date();
     let currentDate = today.toISOString()
     let expireDate = date
-    return expireDate < currentDate;
+    return currentDate > expireDate;
     // return true; // TODO - for testing
   }
 
@@ -277,7 +277,7 @@ export class ProfileServicePage implements OnInit, AfterViewChecked, OnDestroy {
     let today = new Date();
     let currentDate = today.toISOString()
     let expireDate = date
-    return expireDate < currentDate;
+    return currentDate > expireDate;
     // return true; // TODO - for testing
   }
 

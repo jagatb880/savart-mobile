@@ -20,6 +20,10 @@ export class ProfileService {
     return this.http.get(ServiceURL.SELECTED_SUBSCRIPTION_QUESTIONS);
   }
 
+  get_subscription(): Observable<any> {
+    return this.http.get(ServiceURL.CHECK_SUBSCRIPTION);
+  }
+
   selectedSubscriptionPayments(body): Observable<any> {
     return this.http.post(ServiceURL.SELECTED_SUBSCRIPTION_PAYMENT, body);
   }

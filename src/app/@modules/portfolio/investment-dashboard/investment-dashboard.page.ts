@@ -126,7 +126,7 @@ export class InvestmentDashboardPage implements OnInit {
               this.showExpireAlert("Please complete your demat to raise an investment request");
               break;
             case this.statusList[3].status:
-              this.subs.sink = this.profileService.getSelectedSubscriptionQuestions().subscribe((res) => {
+              this.subs.sink = this.profileService.get_subscription().subscribe((res) => {
                 if(res && res.data == null){
                   this.showExpireAlert("Please complete your subscription to raise an investment request");
                 }else{

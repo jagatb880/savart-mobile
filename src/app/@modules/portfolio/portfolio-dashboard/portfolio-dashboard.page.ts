@@ -98,6 +98,7 @@ export class PortfolioDashboardPage implements OnInit, OnDestroy {
       header: 'Warning',
       cssClass: 'my-custom-class',
       backdropDismiss: false,
+      mode: 'ios',
       message: 'Your subscription is expired, please subscribe for raising the new investment request or review portfolio',
       buttons: ['Ok']
     });
