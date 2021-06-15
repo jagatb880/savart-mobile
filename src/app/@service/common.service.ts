@@ -150,6 +150,9 @@ export class CommonService {
                     this.loadingSvc.hide();
                     console.log('Error opening file',error)
                   })
+                }).catch(error=>{
+                  this.loadingSvc.hide();
+                  console.log('Error opening file',error)
                 })
               }
             ).catch(
