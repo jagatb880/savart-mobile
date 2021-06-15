@@ -137,10 +137,19 @@ export class CommonService {
             }
             this.file.checkFile(filePath, fileName).then(
               (files) => {
-                this.fileOpener.open(filePath+fileName,'application/pdf').then(()=>{
-                  console.log('File is opened')
-                }).catch(error=>{
-                  console.log('Error opening file',error)
+                this.file.removeFile(filePath,fileName).then(data=>{
+                  this.file.writeFile(filePath,fileName,event.body).then(data=>{
+                    let path = data.nativeURL;
+                    this.loadingSvc.hide();
+                    this.fileOpener.open(path,'application/pdf').then(()=>{
+                      console.log('File is opened')
+                    }).catch(error=>{
+                      console.log('Error opening file',error)
+                    })
+                  }).catch(error=>{
+                    this.loadingSvc.hide();
+                    console.log('Error opening file',error)
+                  })
                 })
               }
             ).catch(
