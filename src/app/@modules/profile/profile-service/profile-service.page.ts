@@ -258,7 +258,7 @@ export class ProfileServicePage implements OnInit, AfterViewChecked, OnDestroy {
     if(this.commonService.androidPermission == null){
       this.commonService.getAndroidPermission();
     }else if(this.commonService.androidPermission){
-      this.commonService.downloadPdfAndOpen('https://savart.in/media/Terms%20and%20conditions/Terms__Conditions.pdf');
+      this.commonService.downloadPdfAndOpen('https://savart.in/media/Terms%20and%20conditions/Savart%20-%20Investment%20Advisory%20Agreement.pdf');
     }else {
       this.commonService.getAndroidPermission();
     }
