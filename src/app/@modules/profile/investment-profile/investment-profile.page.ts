@@ -110,7 +110,7 @@ export class InvestmentProfilePage implements OnInit, AfterViewChecked {
       this.loadingService.hide();
       if (res.statusCode === 0) {
         if (res.data && res.data.length > 0) {
-          this.isEditable = false;
+          this.isEditable = true;
         }
         res.data &&
           res.data.forEach((value, i) => {

@@ -264,12 +264,8 @@ export class CommonState {
   }
 
   checkIsExpired(date) {
-    var today = new Date();
-    today.setHours(0, 0, 0, 0);
-    let currentDate = moment(today).format("DD-MM-YYYY");
-    let checkDate = new Date(date);
-    let checkDate1 = moment(checkDate).format("DD-MM-YYYY");
-    return moment(currentDate).isAfter(checkDate1);
-    // return true; // TODO - for testing
+    let expDate = new Date(date)
+    let currentDate = new Date();
+    return expDate < currentDate
   }
 }

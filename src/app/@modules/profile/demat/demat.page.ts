@@ -60,7 +60,7 @@ export class DematPage implements OnInit, AfterViewChecked, OnDestroy {
       console.log({ cust });
       if (cust && cust[0]) {
         if (cust.filter((val) => val.taskname === "Demat")[0].status === "C") {
-          this.isDisabled = await true;
+          this.isDisabled = await false;
         } else {
           this.isDisabled = await false;
         }

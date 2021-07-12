@@ -14,7 +14,7 @@
     >
     </ng-container>
     <app-nk-text
-      [ngClass]="disabled?'disabled-tag':'enabled-tag'"
+      [ngClass]="disabled || label == 'Registered Mobile'?'disabled-tag':'enabled-tag'"
       [formGroup]="formGroup"
       [value]="formGroup?.controls?.custresponse?.value"
       type="text"
