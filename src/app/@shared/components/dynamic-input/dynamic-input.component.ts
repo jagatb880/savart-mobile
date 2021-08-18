@@ -35,6 +35,7 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
 
   onChanged(value) {
     console.log({ value });
+    debugger
     this.writeValue(value);
   }
 

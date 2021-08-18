@@ -116,6 +116,7 @@ export class PersonalProfilePage implements OnInit, AfterViewChecked, OnDestroy 
     this.loadingService.show();
     this.subs.sink = this.profileService.getPersonalProfileQuestions().subscribe((res) => {
       console.log({ res });
+      debugger;
       this.loadingService.hide();
       if (res.statusCode === 0) {
         this.getCompletedPersonalProfileQuestions();
