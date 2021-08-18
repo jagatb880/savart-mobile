@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, forwardRef, ElementRef, Renderer2 } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup } from "@angular/forms";
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
 
 @Component({
   selector: "app-dynamic-input",
@@ -31,11 +33,10 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
   onChange: any = () => {};
   onTouched: any = () => {};
 
-  constructor(private elemRef: ElementRef, private render: Renderer2) {}
+  constructor(private elemRef: ElementRef, private render: Renderer2, private camera: Camera) {}
 
   onChanged(value) {
     console.log({ value });
-    debugger
     this.writeValue(value);
   }
 
@@ -77,8 +78,8 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
     // event.preventDefault();
   }
   ngOnInit() {
-    debugger;
     console.log(this.formGroup);
+    console.log("hii",this.values)
   }
 
   writeValue(value: any): void {

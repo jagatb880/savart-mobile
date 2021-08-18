@@ -24,6 +24,8 @@ import { File } from '@ionic-native/file/ngx';
 import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -50,6 +52,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
     File,
     DocumentViewer,
     AndroidPermissions,
+    Camera,
     // FirebaseMessaging,
     // FirebaseX,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

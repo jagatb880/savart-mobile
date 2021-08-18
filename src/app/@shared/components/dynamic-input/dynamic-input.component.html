@@ -177,22 +177,11 @@
     ></app-nk-single-select>
   </div>
 
-  <div *ngSwitchDefault>
-    <div *ngSwitchCase="'U'">
-      <div *ngIf="formGroup?.controls?.custresponse?.value !== 0">
-        <ion-row style="margin-top: 10px;">
-          <ion-col size="6" style="display: flex;">
-              <div style="color: #6a6a6a;">Front</div><div style="    height: 22px;
-              border: 1px solid black;
-              font-size: 13px;
-              width: 83px;
-              text-align: center;
-              padding-top: 2px;
-              margin-left: 11px;
-              color: black;">Choose File</div>
-          </ion-col>
-          <ion-col size="6" style="display: flex;" >
-            <div style="color: #6a6a6a;">Back</div> <div style="    height: 22px;
+  <div *ngSwitchCase="'U'">
+    <div *ngIf="values.length > 0">
+      <ion-row style="margin-top: 10px;">
+        <ion-col size="6" style="display: flex;">
+            <div style="color: #6a6a6a;">Front</div><div style="    height: 22px;
             border: 1px solid black;
             font-size: 13px;
             width: 83px;
@@ -201,19 +190,39 @@
             margin-left: 11px;
             color: black;">Choose File</div>
         </ion-col>
-        </ion-row>
-      </div>
-      <div *ngIf="formGroup?.controls?.custresponse?.value == 0">
-        <!-- <ion-row>
-          <ion-col size="6">
-            <ion-button>Front</ion-button>
-          </ion-col>
-          <ion-col size="6">
-            <ion-button>Back</ion-button>
-          </ion-col>
-        </ion-row> -->
-      </div>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6" style="display: flex;
+        margin-top: 11px;" >
+          <div style="color: #6a6a6a;">Back</div> <div style="    height: 22px;
+          border: 1px solid black;
+          font-size: 13px;
+          width: 83px;
+          text-align: center;
+          padding-top: 2px;
+          margin-left: 11px;
+          color: black;">Choose File</div>
+      </ion-col>
+      </ion-row>
     </div>
+    <div *ngIf="values.length == 0">
+      <ion-row style="margin-top: 10px;">
+        <ion-col size="6" style="display: flex;">
+            <div style="color: #6a6a6a;">Front</div><div style="    height: 22px;
+            border: 1px solid black;
+            font-size: 13px;
+            width: 83px;
+            text-align: center;
+            padding-top: 2px;
+            margin-left: 11px;
+            color: black;">Choose File</div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+  <div *ngSwitchDefault>
+    
   </div>
 </div>
 
