@@ -76,6 +76,7 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
     // event.preventDefault();
   }
   ngOnInit() {
+    debugger;
     console.log(this.formGroup);
   }
 

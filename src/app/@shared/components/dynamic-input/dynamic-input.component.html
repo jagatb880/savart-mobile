@@ -1,9 +1,16 @@
 <ng-container *ngIf="label">
   <div class="dynamic-label">
     <ng-template [ngIf]="isOrder"> {{ order }}. </ng-template>
+    <ng-template [ngIf]="inputType != 'P' && inputType != 'U'"> 
     {{ label }}
+    </ng-template>
     <ng-template [ngIf]="inputType == 'F'"> (INR) </ng-template>
-
+    <ng-template [ngIf]="inputType == 'P'"> 
+      <ion-label [innerHTML]="label"></ion-label>
+    </ng-template>
+    <ng-template [ngIf]="inputType == 'U'"> 
+      <ion-label [innerHtml]="label  | safe"></ion-label>
+    </ng-template>
   </div>
 </ng-container>
 

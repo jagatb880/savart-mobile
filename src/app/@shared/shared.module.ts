@@ -15,6 +15,7 @@ import { NkToggleComponent } from "@shared/components/nk-toggle/nk-toggle.compon
 import { DatePipe } from "./pipes/date.pipe";
 import { NumcommaDirective } from "./directives/numcomma.directive";
 import { MaskDirective } from "./directives/mask.directive";
+import { SafePipe } from './pipes/safepipe.pipe';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MaskDirective } from "./directives/mask.directive";
     DatePipe,
     NumcommaDirective,
     MaskDirective,
+    SafePipe
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -49,6 +51,7 @@ import { MaskDirective } from "./directives/mask.directive";
     DatePipe,
     NumcommaDirective,
     MaskDirective,
+    SafePipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
