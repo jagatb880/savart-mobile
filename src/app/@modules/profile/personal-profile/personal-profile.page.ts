@@ -179,9 +179,7 @@ export class PersonalProfilePage implements OnInit, AfterViewChecked, OnDestroy 
 
   submitProfile() {
     console.log(this.profileForm.valid);
-    console.log(this.profileForm);
     console.log(this.profileForm.value);
-    debugger;
     if (this.profileForm.valid) {
       this.loadingService.show();
       this.subs.sink = this.profileService.savePersonalProfileQuestions(this.profileForm.value).subscribe((res) => {

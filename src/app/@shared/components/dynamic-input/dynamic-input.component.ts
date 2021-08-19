@@ -78,32 +78,10 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
       }
       formGroup.controls.custresponse.value[type]= {
         imgSrc: 'data:image/jpeg;base64,' + imageData,
-        imgName: new Date().getSeconds() + '.jpg'
+        imgName: this.getRandomNumberWithLength(10) + '.jpg'
       }
+      this.onChanged(formGroup.controls.custresponse.value)
       return formGroup;
-    // this.imgPreview = 'img1';
-    // if(value=='front'){
-    //   const imgCode = this.getRandomNumberWithLength(10);
-    //   const newName = imgCode + '.jpg';
-    //   this.adhrafont = imageData;
-    //   this.adharfontimage = newName;
-    // }
-    // else if(value=='back'){
-    //   const imgCode = this.getRandomNumberWithLength(10);
-    //   const newName = imgCode + '.jpg';
-    //   this.adharaback = imageData;
-    //   this.adharabackimage = newName;
-    // }
-    // else if(value=='panfont'){
-    //   const imgCode = this.getRandomNumberWithLength(10);
-    //   const newName = imgCode + '.jpg';
-    //   this.panfont = imageData;
-    //   this.panfontimage = newName;
-    // }
-    // else{
-
-    // }
-    return formGroup;
     }, (err) => {
       console.log('err3' + JSON.stringify(err));
     });
@@ -124,40 +102,16 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
     }
     formGroup.controls.custresponse.value[type] = {
       imgSrc: 'data:image/jpeg;base64,' + imageData,
-      imgName: new Date().getSeconds() + '.jpg'
+      imgName: this.getRandomNumberWithLength(10) + '.jpg'
     }
+    this.onChanged(formGroup.controls.custresponse.value)
     return formGroup;
-    // alert(this.img);
-    // this.imgPreview = 'img1';
-    // if(value=='front'){
-    //   const imgCode = this.getRandomNumberWithLength(10);
-    //   const newName = imgCode + '.jpg';
-    //   this.adhrafont = this.img;
-    //   this.adharfontimage = newName;
-    // }
-    // else if(value=='back'){
-    //   const imgCode = this.getRandomNumberWithLength(10);
-    //   const newName = imgCode + '.jpg';
-    //   this.adharaback = img;
-    //   this.adharabackimage = newName;
-    // }
-    // else if(value=='panfont'){
-    //   const imgCode = this.getRandomNumberWithLength(10);
-    //   const newName = imgCode + '.jpg';
-    //   this.panfont = img;
-    //   this.panfontimage = newName;
-    // }
-    // else{
-      
-    // }
-   
     }, (err) => {
       alert(err);
     });
   }
   
   async getPhoto(value,type) {
-    debugger;
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Choose or take a picture',
       buttons: [
@@ -231,7 +185,6 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
       if(this.values.length == 0){
         this.values.push("Front")
       }
-      debugger;
       let a= this.formGroup.controls.custresponse.value
       a = {}
       a[this.values[0]] = {}
