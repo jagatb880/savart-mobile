@@ -179,7 +179,7 @@
 
   <div *ngSwitchCase="'U'">
     <div *ngIf="values.length > 0">
-      <ion-row style="margin-top: 10px;">
+      <ion-row style="margin-top: 10px;" *ngIf="values[0] != undefined">
         <ion-col size="6" style="display: flex;">
             <div style="color: #6a6a6a;">Front</div><div style="    height: 22px;
             border: 1px solid black;
@@ -188,12 +188,13 @@
             text-align: center;
             padding-top: 2px;
             margin-left: 11px;
-            color: black;" (click)="getPhoto('front')">Choose File</div>
+            color: black;" (click)="getPhoto(formGroup,values[0].trim())">Choose File</div>
             
         </ion-col>
-        <div style="padding-left: 37px;">{{adharfontimage}}</div>
+        <div *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0].trim()] != null"
+        style="padding-left: 37px;">{{formGroup?.controls?.custresponse?.value[values[0].trim()].imgName}}</div>
       </ion-row>
-      <ion-row>
+      <ion-row style="margin-top: 10px;" *ngIf="values[1] != undefined">
         <ion-col size="6" style="display: flex;
         margin-top: 11px;" >
           <div style="color: #6a6a6a;">Back</div> <div style="    height: 22px;
@@ -203,25 +204,10 @@
           text-align: center;
           padding-top: 2px;
           margin-left: 11px;
-          color: black;" (click)="getPhoto('back')">Choose File</div>
+          color: black;" (click)="getPhoto(formGroup,values[1].trim())">Choose File</div>
       </ion-col>
-      <div style="padding-left: 37px;">{{adharabackimage}}</div>
-      </ion-row>
-    </div>
-    <div *ngIf="values.length == 0">
-      <ion-row style="margin-top: 10px;">
-        <ion-col size="6" style="display: flex;">
-            <div style="color: #6a6a6a;">Front</div><div style="    height: 22px;
-            border: 1px solid black;
-            font-size: 13px;
-            width: 83px;
-            text-align: center;
-            padding-top: 2px;
-            margin-left: 11px;
-            color: black;" (click)="getPhoto('panfont')">Choose File</div>
-            
-        </ion-col>
-        <div style="padding-left: 37px;">{{panfontimage}}</div>
+      <div *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[1].trim()] != null"
+        style="padding-left: 37px;">{{formGroup?.controls?.custresponse?.value[values[1].trim()].imgName}}</div>
       </ion-row>
     </div>
   </div>

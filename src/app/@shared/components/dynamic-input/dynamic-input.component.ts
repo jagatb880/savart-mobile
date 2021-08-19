@@ -70,39 +70,47 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
     }
     return str;
   }
-  chooseimage(value){
-    console.log(value);
+  chooseimage(formGroup,type){
+    console.log(formGroup);
     this.camera.getPicture(this.options).then((imageData) => {
-    this.img = 'data:image/jpeg;base64,' + imageData;
+      if(formGroup.controls.custresponse.value == null){
+        formGroup.controls.custresponse.value = {}
+      }
+      formGroup.controls.custresponse.value[type]= {
+        imgSrc: 'data:image/jpeg;base64,' + imageData,
+        imgName: new Date().getSeconds() + '.jpg'
+      }
+      return formGroup;
     // this.imgPreview = 'img1';
-    if(value=='front'){
-      const imgCode = this.getRandomNumberWithLength(10);
-      const newName = imgCode + '.jpg';
-      this.adhrafont = imageData;
-      this.adharfontimage = newName;
-    }
-    else if(value=='back'){
-      const imgCode = this.getRandomNumberWithLength(10);
-      const newName = imgCode + '.jpg';
-      this.adharaback = imageData;
-      this.adharabackimage = newName;
-    }
-    else if(value=='panfont'){
-      const imgCode = this.getRandomNumberWithLength(10);
-      const newName = imgCode + '.jpg';
-      this.panfont = imageData;
-      this.panfontimage = newName;
-    }
-    else{
+    // if(value=='front'){
+    //   const imgCode = this.getRandomNumberWithLength(10);
+    //   const newName = imgCode + '.jpg';
+    //   this.adhrafont = imageData;
+    //   this.adharfontimage = newName;
+    // }
+    // else if(value=='back'){
+    //   const imgCode = this.getRandomNumberWithLength(10);
+    //   const newName = imgCode + '.jpg';
+    //   this.adharaback = imageData;
+    //   this.adharabackimage = newName;
+    // }
+    // else if(value=='panfont'){
+    //   const imgCode = this.getRandomNumberWithLength(10);
+    //   const newName = imgCode + '.jpg';
+    //   this.panfont = imageData;
+    //   this.panfontimage = newName;
+    // }
+    // else{
 
-    }
+    // }
+    return formGroup;
     }, (err) => {
       console.log('err3' + JSON.stringify(err));
     });
   }
 
-  clickImg(value){
-    console.log(value);
+  clickImg(formGroup,type){
+    console.log(formGroup);
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -110,37 +118,45 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
       mediaType: this.camera.MediaType.PICTURE,
     };
     this.camera.getPicture(options).then((imageData) => {
-    this.img = 'data:image/jpeg;base64,' + imageData;
+    if(formGroup.controls.custresponse.value == null){
+      formGroup.controls.custresponse.value = {}
+    }
+    formGroup.controls.custresponse.value[type] = {
+      imgSrc: 'data:image/jpeg;base64,' + imageData,
+      imgName: new Date().getSeconds() + '.jpg'
+    }
+    return formGroup;
     // alert(this.img);
     // this.imgPreview = 'img1';
-    if(value=='front'){
-      const imgCode = this.getRandomNumberWithLength(10);
-      const newName = imgCode + '.jpg';
-      this.adhrafont = imageData;
-      this.adharfontimage = newName;
-    }
-    else if(value=='back'){
-      const imgCode = this.getRandomNumberWithLength(10);
-      const newName = imgCode + '.jpg';
-      this.adharaback = imageData;
-      this.adharabackimage = newName;
-    }
-    else if(value=='panfont'){
-      const imgCode = this.getRandomNumberWithLength(10);
-      const newName = imgCode + '.jpg';
-      this.panfont = imageData;
-      this.panfontimage = newName;
-    }
-    else{
+    // if(value=='front'){
+    //   const imgCode = this.getRandomNumberWithLength(10);
+    //   const newName = imgCode + '.jpg';
+    //   this.adhrafont = this.img;
+    //   this.adharfontimage = newName;
+    // }
+    // else if(value=='back'){
+    //   const imgCode = this.getRandomNumberWithLength(10);
+    //   const newName = imgCode + '.jpg';
+    //   this.adharaback = img;
+    //   this.adharabackimage = newName;
+    // }
+    // else if(value=='panfont'){
+    //   const imgCode = this.getRandomNumberWithLength(10);
+    //   const newName = imgCode + '.jpg';
+    //   this.panfont = img;
+    //   this.panfontimage = newName;
+    // }
+    // else{
       
-    }
+    // }
    
     }, (err) => {
       alert(err);
     });
   }
   
-  async getPhoto(value) {
+  async getPhoto(value,type) {
+    debugger;
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Choose or take a picture',
       buttons: [
@@ -148,12 +164,12 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
           text: 'Choose picture',
           role: 'destructive',
           handler: () => {
-            this.chooseimage(value);
+            this.chooseimage(value,type);
           }
         }, {
           text: 'Take picture',
           handler: () => {
-            this.clickImg(value);
+            this.clickImg(value,type);
           }
         }, {
           text: 'Cancel',
@@ -210,7 +226,13 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
   }
   ngOnInit() {
     console.log(this.formGroup);
-    console.log("hii",this.values)
+    if(this.inputType == 'U'){
+      debugger;
+      let a= this.formGroup.controls.custresponse.value
+      a = {}
+      a[this.values[0]] = {}
+      a[this.values[1]] = {}
+    }
   }
 
   writeValue(value: any): void {
