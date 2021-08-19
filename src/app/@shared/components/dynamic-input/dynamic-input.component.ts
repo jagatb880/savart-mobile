@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, forwardRef, ElementRef, Renderer2 } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup } from "@angular/forms";
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { ActionSheetController } from '@ionic/angular';
 
 
 @Component({
@@ -29,12 +30,142 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
   @Input() disabled = false;
 
   value;
-
+  imageCode: string;
+  imgPreview: string;
+  imageData: any;
+  imageName: string;
+  options: any;
   onChange: any = () => {};
   onTouched: any = () => {};
+  img: string;
+  adharfontimage: string;
+  adharabackimage: string;
+  panfontimage: string;
+  adhrafont: any;
+  adharaback: any;
+  panfont: any;
 
-  constructor(private elemRef: ElementRef, private render: Renderer2, private camera: Camera) {}
+  constructor(private elemRef: ElementRef, private render: Renderer2, private camera: Camera,public actionSheetCtrl: ActionSheetController) {
+    this.options = {
+      maximumImagesCount: 4,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      quality: 70,
+      correctOrientation: true,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      toBack: true,
+      height: 10
+    };
+  }
+  getRandomNumberWithLength(length: number) {
+    const chars = '0123456789ABCDEFGHIJ';
+    length = length || 20;
+    // tslint:disable-next-line:one-variable-per-declaration
+    let str = '', rnd: number;
+    while (length > 0) {
+      rnd = Math.floor(Math.random() * chars.length);
+      str += chars.charAt(rnd);
+      length--;
+    }
+    return str;
+  }
+  chooseimage(value){
+    console.log(value);
+    this.camera.getPicture(this.options).then((imageData) => {
+    this.img = 'data:image/jpeg;base64,' + imageData;
+    // this.imgPreview = 'img1';
+    if(value=='front'){
+      const imgCode = this.getRandomNumberWithLength(10);
+      const newName = imgCode + '.jpg';
+      this.adhrafont = imageData;
+      this.adharfontimage = newName;
+    }
+    else if(value=='back'){
+      const imgCode = this.getRandomNumberWithLength(10);
+      const newName = imgCode + '.jpg';
+      this.adharaback = imageData;
+      this.adharabackimage = newName;
+    }
+    else if(value=='panfont'){
+      const imgCode = this.getRandomNumberWithLength(10);
+      const newName = imgCode + '.jpg';
+      this.panfont = imageData;
+      this.panfontimage = newName;
+    }
+    else{
 
+    }
+    }, (err) => {
+      console.log('err3' + JSON.stringify(err));
+    });
+  }
+
+  clickImg(value){
+    console.log(value);
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+    };
+    this.camera.getPicture(options).then((imageData) => {
+    this.img = 'data:image/jpeg;base64,' + imageData;
+    // alert(this.img);
+    // this.imgPreview = 'img1';
+    if(value=='front'){
+      const imgCode = this.getRandomNumberWithLength(10);
+      const newName = imgCode + '.jpg';
+      this.adhrafont = imageData;
+      this.adharfontimage = newName;
+    }
+    else if(value=='back'){
+      const imgCode = this.getRandomNumberWithLength(10);
+      const newName = imgCode + '.jpg';
+      this.adharaback = imageData;
+      this.adharabackimage = newName;
+    }
+    else if(value=='panfont'){
+      const imgCode = this.getRandomNumberWithLength(10);
+      const newName = imgCode + '.jpg';
+      this.panfont = imageData;
+      this.panfontimage = newName;
+    }
+    else{
+      
+    }
+   
+    }, (err) => {
+      alert(err);
+    });
+  }
+  
+  async getPhoto(value) {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Choose or take a picture',
+      buttons: [
+        {
+          text: 'Choose picture',
+          role: 'destructive',
+          handler: () => {
+            this.chooseimage(value);
+          }
+        }, {
+          text: 'Take picture',
+          handler: () => {
+            this.clickImg(value);
+          }
+        }, {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            actionSheet.dismiss();
+          }
+        }
+      ]
+    });
+    await actionSheet.present();
+  }
   onChanged(value) {
     console.log({ value });
     this.writeValue(value);

@@ -188,8 +188,10 @@
             text-align: center;
             padding-top: 2px;
             margin-left: 11px;
-            color: black;">Choose File</div>
+            color: black;" (click)="getPhoto('front')">Choose File</div>
+            
         </ion-col>
+        <div style="padding-left: 37px;">{{adharfontimage}}</div>
       </ion-row>
       <ion-row>
         <ion-col size="6" style="display: flex;
@@ -201,8 +203,9 @@
           text-align: center;
           padding-top: 2px;
           margin-left: 11px;
-          color: black;">Choose File</div>
+          color: black;" (click)="getPhoto('back')">Choose File</div>
       </ion-col>
+      <div style="padding-left: 37px;">{{adharabackimage}}</div>
       </ion-row>
     </div>
     <div *ngIf="values.length == 0">
@@ -215,8 +218,10 @@
             text-align: center;
             padding-top: 2px;
             margin-left: 11px;
-            color: black;">Choose File</div>
+            color: black;" (click)="getPhoto('panfont')">Choose File</div>
+            
         </ion-col>
+        <div style="padding-left: 37px;">{{panfontimage}}</div>
       </ion-row>
     </div>
   </div>

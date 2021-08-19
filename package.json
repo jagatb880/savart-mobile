@@ -131,11 +131,15 @@
       "cordova-plugin-document-viewer": {},
       "cordova-plugin-android-permissions": {},
       "cordova-plugin-ionic-keyboard": {},
-      "com.razorpay.cordova": {}
+      "com.razorpay.cordova": {},
+      "cordova-plugin-camera": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      }
     },
     "platforms": [
       "android",
-      "ios"
+      "ios",
+      "browser"
     ]
   }
 }
