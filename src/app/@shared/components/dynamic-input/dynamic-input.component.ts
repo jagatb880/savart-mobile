@@ -111,6 +111,7 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
 
   clickImg(formGroup,type){
     console.log(formGroup);
+    console.log(type);
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -227,6 +228,9 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {
     console.log(this.formGroup);
     if(this.inputType == 'U'){
+      if(this.values.length == 0){
+        this.values.push("Front")
+      }
       debugger;
       let a= this.formGroup.controls.custresponse.value
       a = {}
