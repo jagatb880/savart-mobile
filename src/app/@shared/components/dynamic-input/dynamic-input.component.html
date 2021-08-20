@@ -1,14 +1,14 @@
 <ng-container *ngIf="label">
   <div class="dynamic-label">
     <ng-template [ngIf]="isOrder"> {{ order }}. </ng-template>
-    <ng-template [ngIf]="inputType != 'P' && inputType != 'U'"> 
-    {{ label }}
+    <ng-template [ngIf]="inputType != 'P' && inputType != 'U'">
+      {{ label }}
     </ng-template>
     <ng-template [ngIf]="inputType == 'F'"> (INR) </ng-template>
-    <ng-template [ngIf]="inputType == 'P'"> 
+    <ng-template [ngIf]="inputType == 'P'">
       <ion-label [innerHTML]="label"></ion-label>
     </ng-template>
-    <ng-template [ngIf]="inputType == 'U'"> 
+    <ng-template [ngIf]="inputType == 'U'">
       <ion-label [innerHtml]="label  | safe"></ion-label>
     </ng-template>
   </div>
@@ -17,46 +17,29 @@
 <div [ngSwitch]="inputType">
   <div *ngSwitchCase="'E'">
     <ng-container
-      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
-    >
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate">
     </ng-container>
-    <app-nk-text
-      [ngClass]="disabled || label == 'Registered Mobile'?'disabled-tag':'enabled-tag'"
-      [formGroup]="formGroup"
-      [value]="formGroup?.controls?.custresponse?.value"
-      type="text"
-      (input)="onChange($event?.target?.value)"
-    ></app-nk-text>
+    <app-nk-text [ngClass]="disabled || label == 'Registered Mobile'?'disabled-tag':'enabled-tag'"
+      [formGroup]="formGroup" [value]="formGroup?.controls?.custresponse?.value" type="text"
+      (input)="onChange($event?.target?.value)"></app-nk-text>
   </div>
 
   <div *ngSwitchCase="'B'">
     <ng-container
-      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
-    >
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate">
     </ng-container>
-    <app-nk-toggle
-      [ngClass]="disabled?'disabled-tag':'enabled-tag'"
-      [value]="formGroup?.controls?.custresponse?.value"
-      [formGroup]="formGroup"
-      type="text"
-      (ionChange)="onChange($event?.detail?.checked)"
-    ></app-nk-toggle>
+    <app-nk-toggle [ngClass]="disabled?'disabled-tag':'enabled-tag'" [value]="formGroup?.controls?.custresponse?.value"
+      [formGroup]="formGroup" type="text" (ionChange)="onChange($event?.detail?.checked)"></app-nk-toggle>
   </div>
 
   <!-- TODO : TYPE number changed to tel based on Savart Team Requirement : 26-10-2020 -->
   <div *ngSwitchCase="'F'">
     <ng-container
-      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
-    >
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate">
     </ng-container>
-    
-    <app-nk-text
-      [ngClass]="disabled?'disabled-tag':'enabled-tag'"
-      [value]="formGroup?.controls?.custresponse?.value"
-      type="tel"
-      (input)="allowNumberOnly($event)"
-      (ionChange)="allowNumberOnly($event)"
-    ></app-nk-text>
+
+    <app-nk-text [ngClass]="disabled?'disabled-tag':'enabled-tag'" [value]="formGroup?.controls?.custresponse?.value"
+      type="tel" (input)="allowNumberOnly($event)" (ionChange)="allowNumberOnly($event)"></app-nk-text>
     <!-- <ion-input
       [value]="formGroup?.controls?.custresponse?.value"
       [readonly]="disabled"
@@ -69,8 +52,7 @@
 
   <div *ngSwitchCase="'Y'">
     <ng-container
-      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
-    >
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate">
     </ng-container>
     <!-- <app-nk-text
       [readonly]="disabled"
@@ -78,110 +60,75 @@
       type="date"
       (input)="onChange($event?.target?.value)"
       ></app-nk-text> -->
-    <ion-input
-      [ngClass]="disabled?'disabled-tag':'enabled-tag'"
-      (input)="onChange($event?.target?.value)"
-      class="dynamic-input"
-      type="text"
-      [value]="formGroup?.controls?.custresponse?.value"
-      appMask="**/**/****"
-      placeholder="DD/MM/YYYY"
-    ></ion-input>
+    <ion-input [ngClass]="disabled?'disabled-tag':'enabled-tag'" (input)="onChange($event?.target?.value)"
+      class="dynamic-input" type="text" [value]="formGroup?.controls?.custresponse?.value" appMask="**/**/****"
+      placeholder="DD/MM/YYYY"></ion-input>
   </div>
 
   <div *ngSwitchCase="'G'">
     <ng-container
-      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
-    >
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate">
     </ng-container>
-    <app-nk-text
-      [ngClass]="disabled?'disabled-tag':'enabled-tag'"
-      [value]="formGroup?.controls?.custresponse?.value"
-      type="email"
-      (input)="onChange($event?.target?.value)"
-    ></app-nk-text>
+    <app-nk-text [ngClass]="disabled?'disabled-tag':'enabled-tag'" [value]="formGroup?.controls?.custresponse?.value"
+      type="email" (input)="onChange($event?.target?.value)"></app-nk-text>
   </div>
 
   <div *ngSwitchCase="'RT'">
     <ng-container
-      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
-    >
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate">
     </ng-container>
     <ng-container *ngIf="values?.length > 0; else RTvalues">
-      <app-nk-single-select
-        [ngClass]="disabled?'disabled-tag':'enabled-tag'"
+      <app-nk-single-select [ngClass]="disabled?'disabled-tag':'enabled-tag'"
         [value]="formGroup?.controls?.custresponse?.value"
-        (ionChange)="onChanged($event?.target?.value || $event?.detail?.value)"
-        [list]="values"
-      ></app-nk-single-select>
+        (ionChange)="onChanged($event?.target?.value || $event?.detail?.value)" [list]="values"></app-nk-single-select>
     </ng-container>
     <ng-template #RTvalues>
-      <app-nk-text
-        [ngClass]="disabled?'disabled-tag':'enabled-tag'"
-        [value]="formGroup?.controls?.custresponse?.value"
-        type="text"
-        (input)="onChange($event?.target?.value)"
-      ></app-nk-text>
+      <app-nk-text [ngClass]="disabled?'disabled-tag':'enabled-tag'" [value]="formGroup?.controls?.custresponse?.value"
+        type="text" (input)="onChange($event?.target?.value)"></app-nk-text>
     </ng-template>
   </div>
 
   <div *ngSwitchCase="'RN'">
     <ng-container
-      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
-    >
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate">
     </ng-container>
     <ng-container *ngIf="values?.length > 0; else RNvalues">
-      <app-nk-single-select
-        [ngClass]="disabled?'disabled-tag':'enabled-tag'"
+      <app-nk-single-select [ngClass]="disabled?'disabled-tag':'enabled-tag'"
         [value]="formGroup?.controls?.custresponse?.value"
-        (ionChange)="onChanged($event?.target?.value || $event?.detail?.value)"
-        [list]="values"
-      ></app-nk-single-select>
+        (ionChange)="onChanged($event?.target?.value || $event?.detail?.value)" [list]="values"></app-nk-single-select>
     </ng-container>
     <ng-template #RNvalues>
-      <app-nk-text
-        [ngClass]="disabled?'disabled-tag':'enabled-tag'"
-        [value]="formGroup?.controls?.custresponse?.value"
-        type="number"
-        (input)="onChange($event?.target?.value)"
-      ></app-nk-text>
+      <app-nk-text [ngClass]="disabled?'disabled-tag':'enabled-tag'" [value]="formGroup?.controls?.custresponse?.value"
+        type="number" (input)="onChange($event?.target?.value)"></app-nk-text>
     </ng-template>
   </div>
 
   <div *ngSwitchCase="'S'">
     <ng-container
-      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
-    >
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate">
     </ng-container>
 
-    <app-nk-radio
-      [ngClass]="disabled?'disabled-tag':'enabled-tag'"
-      [value]="formGroup?.controls?.custresponse?.value"
-      (ionChange)="onChange($event?.target?.value)"
-      [values]="values"
-      [order]="order"
-      [fieldset]="label + order"
-    ></app-nk-radio>
+    <app-nk-radio [ngClass]="disabled?'disabled-tag':'enabled-tag'" [value]="formGroup?.controls?.custresponse?.value"
+      (ionChange)="onChange($event?.target?.value)" [values]="values" [order]="order" [fieldset]="label + order">
+    </app-nk-radio>
   </div>
 
   <div *ngSwitchCase="'M'">
     <ng-container
-      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate"
-    >
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate">
     </ng-container>
-    <app-nk-single-select
-      [ngClass]="disabled?'disabled-tag':'enabled-tag'"
+    <app-nk-single-select [ngClass]="disabled?'disabled-tag':'enabled-tag'"
       [value]="formGroup?.controls?.custresponse?.value"
-      (ionChange)="onChanged($event?.target?.value || $event?.detail?.value)"
-      [list]="values"
-    ></app-nk-single-select>
+      (ionChange)="onChanged($event?.target?.value || $event?.detail?.value)" [list]="values"></app-nk-single-select>
   </div>
 
   <div *ngSwitchCase="'U'">
     <div *ngIf="values.length > 0">
-      <ion-row style="margin-top: 10px;" *ngIf="values[0] != undefined">
-        <ion-col size="6" style="display: flex;">
-            <div style="color: #6a6a6a;">Front</div><div style="    height: 22px;
+      <div [ngClass]="disabled?'disabled-tag':'enabled-tag'">
+        <ion-row style="margin-top: 10px;" *ngIf="values[0] != undefined">
+          <ion-col size="6" style="display: flex;">
+            <div style="color: #6a6a6a;">Front</div>
+            <div style="    height: 22px;
             border: 1px solid black;
             font-size: 13px;
             width: 83px;
@@ -189,24 +136,28 @@
             padding-top: 2px;
             margin-left: 11px;
             color: black;" (click)="getPhoto(formGroup,'Front')">Choose File</div>
-            
-        </ion-col>
-        <div *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Front'] != null"
-        style="padding-left: 37px;padding-top: 7px;">{{formGroup?.controls?.custresponse?.value['Front'].imgName}}</div>
-        <!-- <ion-label [innerHTML]="label"></ion-label> -->
-        <div>
-          
-        </div>
-      </ion-row>
-      <ion-row *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Front'] != null">
-        <ion-col>
-          <img style="height: 200px;width: 100%;" [src]="formGroup?.controls?.custresponse?.value['Front'].imgSrc">
-        </ion-col>
-      </ion-row>
-      <ion-row style="margin-top: 10px;" *ngIf="values[1] != undefined">
-        <ion-col size="6" style="display: flex;
-        margin-top: 11px;" >
-          <div style="color: #6a6a6a;">Back</div> <div style="    height: 22px;
+
+          </ion-col>
+          <div
+            *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Front'] != null"
+            style="padding-left: 37px;padding-top: 7px;">{{formGroup?.controls?.custresponse?.value['Front'].imgName}}
+          </div>
+          <!-- <ion-label [innerHTML]="label"></ion-label> -->
+          <div>
+
+          </div>
+        </ion-row>
+        <ion-row
+          *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Front'] != null">
+          <ion-col>
+            <img style="height: 200px;width: 100%;" [src]="formGroup?.controls?.custresponse?.value['Front'].imgSrc">
+          </ion-col>
+        </ion-row>
+        <ion-row style="margin-top: 10px;" *ngIf="values[1] != undefined">
+          <ion-col size="6" style="display: flex;
+        margin-top: 11px;">
+            <div style="color: #6a6a6a;">Back</div>
+            <div style="    height: 22px;
           border: 1px solid black;
           font-size: 13px;
           width: 83px;
@@ -214,32 +165,34 @@
           padding-top: 2px;
           margin-left: 11px;
           color: black;" (click)="getPhoto(formGroup,'Back')">Choose File</div>
-      </ion-col>
-      <div *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Back'] != null"
-        style="padding-left: 37px;padding-top: 17px;">{{formGroup?.controls?.custresponse?.value['Back'].imgName}}</div>
-      </ion-row>
-      <ion-row *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Back'] != null">
-        <ion-col>
-          <img style="height: 200px;width: 100%;" [src]="formGroup?.controls?.custresponse?.value['Back'].imgSrc">
-        </ion-col>
-      </ion-row>
+          </ion-col>
+          <div
+            *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Back'] != null"
+            style="padding-left: 37px;padding-top: 17px;">{{formGroup?.controls?.custresponse?.value['Back'].imgName}}
+          </div>
+        </ion-row>
+        <ion-row
+          *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Back'] != null">
+          <ion-col>
+            <img style="height: 200px;width: 100%;" [src]="formGroup?.controls?.custresponse?.value['Back'].imgSrc">
+          </ion-col>
+        </ion-row>
+      </div>
     </div>
   </div>
 
   <div *ngSwitchDefault>
-    
+
   </div>
 </div>
 
 <ng-template #errortemplate>
   <ul class="has-error" *ngIf="!formGroup?.controls?.custresponse?.valid && formGroup?.controls?.custresponse?.dirty">
-    <li
-      *ngIf="
+    <li *ngIf="
         !formGroup?.controls?.custresponse?.valid &&
         formGroup?.controls?.custresponse?.dirty &&
         formGroup?.controls?.custresponse?.errors?.required
-      "
-    >
+      ">
       This field is required or not valid
     </li>
     <li *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.errors?.validateEmail">
@@ -250,8 +203,7 @@
     </li>
 
     <li
-      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.errors?.validateOnlyNumber"
-    >
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.errors?.validateOnlyNumber">
       Please enter valid number
     </li>
   </ul>
