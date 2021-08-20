@@ -64,7 +64,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   checkverification(){
   this.profileService.checkVerificationDocument().subscribe((res) => {
-    alert(res.data);
+    // alert(res.data);
     if(res.data == true){
       this.navCtrl.navigateRoot("/tabs/tab2");
     }else if(res.data == false){
