@@ -94,4 +94,8 @@ export class ProfileService {
   getPorfolioAdvice(porfolioAdviceUrl): Observable<any> {
     return this.http.get(ServiceURL.PORTFOFIO_ADVICE+"/"+porfolioAdviceUrl);
   }
+
+  checkVerificationDocument(): Observable<any> {
+    return this.http.get(ServiceURL.CHECKVERFICATION_DOCUMENT);
+  }
 }

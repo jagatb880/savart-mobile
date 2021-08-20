@@ -57,6 +57,7 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
       toBack: true,
       height: 10
     };
+    
   }
   getRandomNumberWithLength(length: number) {
     const chars = '0123456789ABCDEFGHIJ';

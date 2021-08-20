@@ -121,7 +121,8 @@ export class PersonalProfilePage implements OnInit, AfterViewChecked, OnDestroy 
         this.getCompletedPersonalProfileQuestions();
         res.data &&
           res.data.forEach((value) => {
-            if (value.profqname === "Country" || value.profqname === "country") {
+            console.log(value);
+            if (value.profqname === "PAN Card" || value.profqname === "PAN Card") {
               this.getProfiles().push(
                 this.dynamicNewProfiles(
                   value.profqname,
@@ -159,6 +160,7 @@ export class PersonalProfilePage implements OnInit, AfterViewChecked, OnDestroy 
               this.getProfiles().controls[i].patchValue({
                 custresponse: value.custresponse || null,
               });
+              console.log(value.custresponse);
             });
           this.isEditable = false;
         } else {

@@ -8,6 +8,7 @@ import { LoadingService } from "@service/loading.service";
 import { ToastrService } from "@service/toastr.service";
 import { InboxService } from "@service/inbox.service";
 import { MessageStatus } from "@core/constants/constants";
+import { ProfileService } from "@service/profile.service";
 
 // import { Plugins, PushNotification, PushNotificationToken, PushNotificationActionPerformed } from "@capacitor/core";
 import { AuthService } from "@service/auth.service";
@@ -28,6 +29,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
 export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private platform: Platform,
+    private profileService: ProfileService,
     public store: Store,
     public actions: Actions,
     public baseService: BaseService,
@@ -56,10 +58,44 @@ export class AppComponent implements OnInit, OnDestroy {
         //this.loadingService.hide();
         this.splahScreen.hide();
         this.initFirebase()
+        this.checkverification();
       //}, 3000);
     });
   }
+  checkverification(){
+  this.profileService.checkVerificationDocument().subscribe((res) => {
+    alert(res.data);
+    if(res.data == true){
+      this.navCtrl.navigateRoot("/tabs/tab2");
+    }else if(res.data == false){
+      this.aler()
+      
+    }
+  });
+}
+async aler(){
+  const alert = await this.alertController.create({
+    cssClass: 'my-custom-class',
+   
+    message: 'Please complete your KYC to continue',
+    buttons: [
+      {
+        text: "Ok",
+        handler: () => {
+          console.log("Confirm Okay");
+          this.navCtrl.navigateRoot("tabs/tab1/personal-profile");
+        },
+      },
+    ],
+  });
+  // this.navCtrl.navigateRoot("tabs/tab1/personal-profile");
+  await alert.present();
 
+  const { role } = await alert.onDidDismiss();
+  
+  
+  console.log('onDidDismiss resolved with role', role);
+}
   // pushNotificationTrigger() {
   //   // Request permission to use push notifications
   //   // iOS will prompt user and return if they granted permission or not

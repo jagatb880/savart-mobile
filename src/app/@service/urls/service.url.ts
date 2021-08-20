@@ -63,5 +63,6 @@ export const ServiceURL = {
   GET_COUNTRIES: "/clients/personal-profile/countries",
   PORTFOFIO_ADVICE: "/clients",
   PORTFOLIO_REQUEST_RECEIVED: "/clients/check_portfolio_request_received",
-  CHECK_SUBSCRIPTION: "/clients/check-subscription"
+  CHECK_SUBSCRIPTION: "/clients/check-subscription",
+  CHECKVERFICATION_DOCUMENT:"/clients/checkverificationDocuments"
 };
