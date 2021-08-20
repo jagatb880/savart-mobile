@@ -46,11 +46,50 @@ export class InvestmentDashboardPage implements OnInit {
   ionViewWillEnter() {
     this.getCustomerStatus();
     this.getSelectedGoals();
+    setTimeout(() => {
+      this.checkverification();
+    }, 4000);
   }
 
   ngOnDestroy() {
     this.subs.unsubscribe();
   }
+
+  checkverification(){  
+    this.profileService.checkVerificationDocument().subscribe((res) => {
+      // alert(res.data);
+      if(res.data == true){
+        this.navCtrl.navigateRoot("/tabs/tab2");
+      }else if(res.data == false){
+        this.aler()
+        
+      }
+    });
+    }
+
+    async aler(){
+      const alert = await this.alertCtrl.create({
+        cssClass: 'my-custom-class',
+        header: 'Warning',
+        message: 'Please complete your KYC to continue',
+        buttons: [
+          {
+            text: "Ok",
+            handler: () => {
+              console.log("Confirm Okay");
+              this.navCtrl.navigateRoot("tabs/tab1/personal-profile");
+            },
+          },
+        ],
+      });
+      // this.navCtrl.navigateRoot("tabs/tab1/personal-profile");
+      await alert.present();
+    
+      const { role } = await alert.onDidDismiss();
+      
+      
+      console.log('onDidDismiss resolved with role', role);
+    }
 
   getCustomerStatus() : Promise < any[] > {
     let promise: Promise < any[] > = new Promise(async (resolve, reject) => {

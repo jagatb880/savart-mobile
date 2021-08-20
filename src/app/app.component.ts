@@ -57,45 +57,12 @@ export class AppComponent implements OnInit, OnDestroy {
       //setTimeout(() => {
         //this.loadingService.hide();
         this.splahScreen.hide();
-        this.initFirebase()
-        this.checkverification();
+        this.initFirebase();
       //}, 3000);
     });
   }
-  checkverification(){
-  this.profileService.checkVerificationDocument().subscribe((res) => {
-    // alert(res.data);
-    if(res.data == true){
-      this.navCtrl.navigateRoot("/tabs/tab2");
-    }else if(res.data == false){
-      this.aler()
-      
-    }
-  });
-}
-async aler(){
-  const alert = await this.alertController.create({
-    cssClass: 'my-custom-class',
-   
-    message: 'Please complete your KYC to continue',
-    buttons: [
-      {
-        text: "Ok",
-        handler: () => {
-          console.log("Confirm Okay");
-          this.navCtrl.navigateRoot("tabs/tab1/personal-profile");
-        },
-      },
-    ],
-  });
-  // this.navCtrl.navigateRoot("tabs/tab1/personal-profile");
-  await alert.present();
+  
 
-  const { role } = await alert.onDidDismiss();
-  
-  
-  console.log('onDidDismiss resolved with role', role);
-}
   // pushNotificationTrigger() {
   //   // Request permission to use push notifications
   //   // iOS will prompt user and return if they granted permission or not
