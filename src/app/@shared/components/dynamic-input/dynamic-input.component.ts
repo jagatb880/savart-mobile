@@ -73,6 +73,7 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
   }
   chooseimage(formGroup,type){
     console.log(formGroup);
+    debugger;
     this.camera.getPicture(this.options).then((imageData) => {
       if(formGroup.controls.custresponse.value == null){
         formGroup.controls.custresponse.value = {}

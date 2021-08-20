@@ -188,15 +188,20 @@
             text-align: center;
             padding-top: 2px;
             margin-left: 11px;
-            color: black;" (click)="getPhoto(formGroup,values[0].trim())">Choose File</div>
+            color: black;" (click)="getPhoto(formGroup,'Front')">Choose File</div>
             
         </ion-col>
-        <div *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0].trim()] != null"
-        style="padding-left: 37px;">{{formGroup?.controls?.custresponse?.value[values[0].trim()].imgName}}</div>
+        <div *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Front'] != null"
+        style="padding-left: 37px;padding-top: 7px;">{{formGroup?.controls?.custresponse?.value['Front'].imgName}}</div>
         <!-- <ion-label [innerHTML]="label"></ion-label> -->
         <div>
           
         </div>
+      </ion-row>
+      <ion-row *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Front'] != null">
+        <ion-col>
+          <img style="height: 200px;width: 100%;" [src]="formGroup?.controls?.custresponse?.value['Front'].imgSrc">
+        </ion-col>
       </ion-row>
       <ion-row style="margin-top: 10px;" *ngIf="values[1] != undefined">
         <ion-col size="6" style="display: flex;
@@ -208,10 +213,15 @@
           text-align: center;
           padding-top: 2px;
           margin-left: 11px;
-          color: black;" (click)="getPhoto(formGroup,values[1].trim())">Choose File</div>
+          color: black;" (click)="getPhoto(formGroup,'Back')">Choose File</div>
       </ion-col>
-      <div *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[1].trim()] != null"
-        style="padding-left: 37px;">{{formGroup?.controls?.custresponse?.value[values[1].trim()].imgName}}</div>
+      <div *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Back'] != null"
+        style="padding-left: 37px;padding-top: 17px;">{{formGroup?.controls?.custresponse?.value['Back'].imgName}}</div>
+      </ion-row>
+      <ion-row *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Back'] != null">
+        <ion-col>
+          <img style="height: 200px;width: 100%;" [src]="formGroup?.controls?.custresponse?.value['Back'].imgSrc">
+        </ion-col>
       </ion-row>
     </div>
   </div>
