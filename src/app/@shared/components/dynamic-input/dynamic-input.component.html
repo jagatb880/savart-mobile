@@ -231,7 +231,7 @@
           </div>
         </ion-row>
         <ion-row
-        *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0]] != null">
+        *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0]] != null && formGroup?.controls?.custresponse?.value[values[0]].imgSrc != null">
         <ion-col>
           <img style="height: 200px;width: 100%;" [src]="formGroup?.controls?.custresponse?.value[values[0]].imgSrc">
         </ion-col>
