@@ -128,7 +128,8 @@
         <ion-row style="margin-top: 10px;" *ngIf="values[0] != undefined">
           <ion-col size="6" style="display: flex;">
             <div style="color: #6a6a6a;">Front</div>
-            <div style="    height: 22px;
+            <div *ngIf="formGroup?.controls?.custresponse?.value['Front'].imgName == null"
+            style="    height: 22px;
             border: 1px solid black;
             font-size: 13px;
             width: 83px;

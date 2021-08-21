@@ -193,10 +193,12 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
       if(this.values.length == 0){
         this.values.push("Front")
       }
-      let a= this.formGroup.controls.custresponse.value
-      a = {}
-      a[this.values[0]] = {}
-      a[this.values[1]] = {}
+      if(this.formGroup.controls.custresponse.value == null){
+        let a= this.formGroup.controls.custresponse.value
+        a = {}
+        a[this.values[0]] = {}
+        a[this.values[1]] = {}
+      }
     }
   }
 
