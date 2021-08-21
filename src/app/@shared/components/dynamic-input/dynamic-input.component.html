@@ -128,7 +128,7 @@
         <ion-row style="margin-top: 10px;" *ngIf="values[0] != undefined">
           <ion-col size="6" style="display: flex;">
             <div style="color: #6a6a6a;">Front</div>
-            <div *ngIf="formGroup?.controls?.custresponse?.value['Front'].imgName == null"
+            <div
             style="    height: 22px;
             border: 1px solid black;
             font-size: 13px;
@@ -136,12 +136,12 @@
             text-align: center;
             padding-top: 2px;
             margin-left: 11px;
-            color: black;" (click)="getPhoto(formGroup,'Front')">Choose File</div>
+            color: black;" (click)="getPhoto(formGroup,values[0])">Choose File</div>
 
           </ion-col>
           <div
-            *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Front'] != null"
-            style="padding-left: 37px;padding-top: 7px;">{{formGroup?.controls?.custresponse?.value['Front'].imgName}}
+            *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0]] != null"
+            style="padding-left: 37px;padding-top: 7px;">{{formGroup?.controls?.custresponse?.value[values[0]].imgName}}
           </div>
           <!-- <ion-label [innerHTML]="label"></ion-label> -->
           <div>
@@ -149,9 +149,9 @@
           </div>
         </ion-row>
         <ion-row
-          *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Front'] != null">
+          *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0]] != null">
           <ion-col>
-            <img style="height: 200px;width: 100%;" [src]="formGroup?.controls?.custresponse?.value['Front'].imgSrc">
+            <img style="height: 200px;width: 100%;" [src]="formGroup?.controls?.custresponse?.value[values[0]].imgSrc">
           </ion-col>
         </ion-row>
         <ion-row style="margin-top: 10px;" *ngIf="values[1] != undefined">
