@@ -65,31 +65,31 @@ export class InvestmentDashboardPage implements OnInit {
         
       }
     });
-    }
+  }
 
-    async aler(){
-      const alert = await this.alertCtrl.create({
-        cssClass: 'my-custom-class',
-        header: 'Warning',
-        message: 'Please complete your KYC to continue',
-        buttons: [
-          {
-            text: "Ok",
-            handler: () => {
-              console.log("Confirm Okay");
-              this.navCtrl.navigateRoot("tabs/tab1/personal-profile");
-            },
+  async aler(){
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Warning',
+      message: 'Please complete your KYC to continue',
+      buttons: [
+        {
+          text: "Ok",
+          handler: () => {
+            console.log("Confirm Okay");
+            this.navCtrl.navigateRoot("tabs/tab1/personal-profile");
           },
-        ],
-      });
-      // this.navCtrl.navigateRoot("tabs/tab1/personal-profile");
-      await alert.present();
+        },
+      ],
+    });
+    // this.navCtrl.navigateRoot("tabs/tab1/personal-profile");
+    await alert.present();
+  
+    const { role } = await alert.onDidDismiss();
     
-      const { role } = await alert.onDidDismiss();
-      
-      
-      console.log('onDidDismiss resolved with role', role);
-    }
+    
+    console.log('onDidDismiss resolved with role', role);
+  }
 
   getCustomerStatus() : Promise < any[] > {
     let promise: Promise < any[] > = new Promise(async (resolve, reject) => {
@@ -113,23 +113,30 @@ export class InvestmentDashboardPage implements OnInit {
     this.getCustomerStatus().then((data)=>{
       if (this.isPendingList.length <= 0 && !this.store.selectSnapshot(CommonState.getExpired)) {
         if (name === "/tabs/tab2/request-advice") {
-          this.loadingService.show();
-          this.portfolioService.getSelectedGoals().subscribe((res) => {
-            this.loadingService.hide();
-            if (res.statusCode === 0) {
-              this.selectedGoals = res.data || [];
-              if (this.selectedGoals.length > 0) {
-                this.navCtrl.navigateForward(`${name}`);
-              } else {
-                this.navCtrl.navigateForward(`/tabs/tab2/select-goal`);
-              }
-            } else {
-              this.selectedGoals = [];
-              if (this.selectedGoals.length > 0) {
-                this.navCtrl.navigateForward(`${name}`);
-              } else {
-                this.navCtrl.navigateForward(`/tabs/tab2/select-goal`);
-              }
+          this.profileService.checkVerificationDocument().subscribe((res) => {
+            // alert(res.data);
+            if(res.data == true){
+              this.loadingService.show();
+              this.portfolioService.getSelectedGoals().subscribe((res) => {
+                this.loadingService.hide();
+                if (res.statusCode === 0) {
+                  this.selectedGoals = res.data || [];
+                  if (this.selectedGoals.length > 0) {
+                    this.navCtrl.navigateForward(`${name}`);
+                  } else {
+                    this.navCtrl.navigateForward(`/tabs/tab2/select-goal`);
+                  }
+                } else {
+                  this.selectedGoals = [];
+                  if (this.selectedGoals.length > 0) {
+                    this.navCtrl.navigateForward(`${name}`);
+                  } else {
+                    this.navCtrl.navigateForward(`/tabs/tab2/select-goal`);
+                  }
+                }
+              });
+            }else if(res.data == false){
+              this.aler()
             }
           });
         } 
