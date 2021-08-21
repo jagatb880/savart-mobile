@@ -2,6 +2,7 @@ import { Component, OnInit, Input, forwardRef, ElementRef, Renderer2 } from "@an
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup } from "@angular/forms";
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ActionSheetController } from '@ionic/angular';
+import { ToastrService } from '@service/toastr.service';
 
 
 @Component({
@@ -45,7 +46,8 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
   adharaback: any;
   panfont: any;
 
-  constructor(private elemRef: ElementRef, private render: Renderer2, private camera: Camera,public actionSheetCtrl: ActionSheetController) {
+  constructor(private elemRef: ElementRef, private render: Renderer2, private camera: Camera,public actionSheetCtrl: ActionSheetController,
+    private toastrService: ToastrService) {
     this.options = {
       maximumImagesCount: 4,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
@@ -73,14 +75,13 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
   }
   chooseimage(formGroup,type){
     console.log(formGroup);
-    debugger;
     this.camera.getPicture(this.options).then((imageData) => {
       if(formGroup.controls.custresponse.value == null){
         formGroup.controls.custresponse.value = {}
       }
       formGroup.controls.custresponse.value[type]= {
         imgSrc: 'data:image/jpeg;base64,' + imageData,
-        imgName: this.getRandomNumberWithLength(10) + '.jpg'
+        imgName: this.getRandomNumberWithLength(10)
       }
       this.onChanged(formGroup.controls.custresponse.value)
       return formGroup;
@@ -104,7 +105,7 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
     }
     formGroup.controls.custresponse.value[type] = {
       imgSrc: 'data:image/jpeg;base64,' + imageData,
-      imgName: this.getRandomNumberWithLength(10) + '.jpg'
+      imgName: this.getRandomNumberWithLength(10)
     }
     this.onChanged(formGroup.controls.custresponse.value)
     return formGroup;
@@ -118,7 +119,7 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
       header: 'Choose or take a picture',
       buttons: [
         {
-          text: 'Choose picture',
+          text: 'Choose From Gallery',
           role: 'destructive',
           handler: () => {
             this.chooseimage(value,type);
@@ -127,6 +128,11 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
           text: 'Take picture',
           handler: () => {
             this.clickImg(value,type);
+          }
+        }, {
+          text: 'Choose file from sd card',
+          handler: () => {
+            this.chooseExternal(value,type);
           }
         }, {
           text: 'Cancel',
@@ -139,6 +145,73 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
     });
     await actionSheet.present();
   }
+
+
+  chooseExternal(value,type){
+    if(type == 'Front'){
+      if(value.value.profqname.includes("PAN")){
+        document.getElementById("uploadFrontPAN").click();
+      }else{
+        document.getElementById("uploadFront").click();
+      }
+    }else{
+      document.getElementById("uploadBack").click();
+    }
+  }
+
+  handleChangeFront(event,formGroup,type){
+    console.log(event.target.files);
+    if (event.target.files && event.target.files[0]) {
+      if (event.target.files[0].size / 1024 <= 1025) {
+        if(formGroup.controls.custresponse.value == null){
+          formGroup.controls.custresponse.value = {}
+        }
+        let reader = new FileReader();
+      reader.onload = (event:any) => {
+      formGroup.controls.custresponse.value[type] = {
+        imgSrc: event.target.result,
+        imgName: this.getRandomNumberWithLength(10)
+      }
+    }
+    reader.readAsDataURL(event.target.files[0]);
+        this.onChanged(formGroup.controls.custresponse.value)
+        return formGroup;
+      } else {
+        this.toastrService.show({
+          message: "File size must be less than 2 mb",
+          type: "error",
+        });
+      }
+    }
+  }
+
+  handleChangeBack(event,formGroup,type){
+    console.log(event.target.files);
+    if (event.target.files && event.target.files[0]) {
+      if (event.target.files[0].size / 1024 <= 1025) {
+        if(formGroup.controls.custresponse.value == null){
+          formGroup.controls.custresponse.value = {}
+        }
+        let reader = new FileReader();
+        reader.onload = (event:any) => {
+        formGroup.controls.custresponse.value[type] = {
+          imgSrc: event.target.result,
+          imgName: this.getRandomNumberWithLength(10)
+        }
+    }
+    reader.readAsDataURL(event.target.files[0]);
+        this.onChanged(formGroup.controls.custresponse.value)
+        return formGroup;
+      } else {
+        this.toastrService.show({
+          message: "File size must be less than 2 mb",
+          type: "error",
+        });
+      }
+    }
+  }
+
+
   onChanged(value) {
     console.log({ value });
     this.writeValue(value);
