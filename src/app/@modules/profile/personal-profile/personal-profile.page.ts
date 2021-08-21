@@ -185,9 +185,9 @@ export class PersonalProfilePage implements OnInit, AfterViewChecked, OnDestroy 
     if (this.profileForm.valid) {
       this.loadingService.show();
       this.subs.sink = this.profileService.savePersonalProfileQuestions(this.profileForm.value).subscribe((res) => {
-        this.loadingService.hide();
         console.log(res);
         if (res.statusCode === 0) {
+          this.loadingService.hide();
           this.toastrService.show({ message: res.data });
           this.loadingService.show();
           this.subs.sink = this.store.dispatch(new UpdateCusStatus()).subscribe((res) => {
@@ -208,7 +208,9 @@ export class PersonalProfilePage implements OnInit, AfterViewChecked, OnDestroy 
               this.navCtrl.navigateRoot("/tabs/tab1");
             }
           });
+        
         } else {
+          this.loadingService.hide();
           this.toastrService.show({ message: res.data + "\n " + res.error, type: "error" });
         }
       });
