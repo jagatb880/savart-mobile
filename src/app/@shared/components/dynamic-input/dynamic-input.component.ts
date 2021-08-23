@@ -81,7 +81,8 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
       }
       formGroup.controls.custresponse.value[type]= {
         imgSrc: 'data:image/jpeg;base64,' + imageData,
-        imgName: this.getRandomNumberWithLength(10)
+        imgName: this.getRandomNumberWithLength(10),
+        imgStatus: false
       }
       this.onChanged(formGroup.controls.custresponse.value)
       return formGroup;
@@ -105,7 +106,8 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
     }
     formGroup.controls.custresponse.value[type] = {
       imgSrc: 'data:image/jpeg;base64,' + imageData,
-      imgName: this.getRandomNumberWithLength(10)
+      imgName: this.getRandomNumberWithLength(10),
+      imgStatus: false
     }
     this.onChanged(formGroup.controls.custresponse.value)
     return formGroup;
@@ -170,7 +172,8 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
       reader.onload = (event:any) => {
       formGroup.controls.custresponse.value[type] = {
         imgSrc: event.target.result,
-        imgName: this.getRandomNumberWithLength(10)
+        imgName: this.getRandomNumberWithLength(10),
+        imgStatus: false
       }
     }
     reader.readAsDataURL(event.target.files[0]);
@@ -196,7 +199,8 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
         reader.onload = (event:any) => {
         formGroup.controls.custresponse.value[type] = {
           imgSrc: event.target.result,
-          imgName: this.getRandomNumberWithLength(10)
+          imgName: this.getRandomNumberWithLength(10),
+          imgStatus: false
         }
     }
     reader.readAsDataURL(event.target.files[0]);
