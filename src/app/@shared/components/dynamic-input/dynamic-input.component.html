@@ -125,20 +125,15 @@
   <div *ngSwitchCase="'U'">
     <div *ngIf="values.length > 1">
       <div [ngClass]="disabled?'disabled-tag':'enabled-tag'">
+
         <ion-row style="margin-top: 10px;" *ngIf="values[0] != undefined">
           <ion-col size="6" style="display: flex;">
             <div style="color: #6a6a6a;">Front</div>
             <div
-            [ngClass]="(formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0]] != null && formGroup?.controls?.custresponse?.value[values[0]].imgStatus == true) == true?'choose-file-disabled':'choose-file'" 
-            (click)="getPhoto(formGroup,values[0])">Choose File</div>
-            <input
-            type="file"
-            name="upload-contract"
-            accept=".jpg,.jpeg,.png"
-            (change)="handleChangeFront($event,formGroup,values[0])"
-            style="display: none"
-            id="uploadFront"
-            />
+              [ngClass]="(formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0]] != null && formGroup?.controls?.custresponse?.value[values[0]].imgStatus == true) == true?'choose-file-disabled':'choose-file'"
+              (click)="getPhoto(formGroup,values[0])">Choose File</div>
+            <input type="file" name="upload-contract" accept=".jpg,.jpeg,.png"
+              (change)="handleChangeFront($event,formGroup,values[0])" style="display: none" id="uploadFront" />
           </ion-col>
           <div
             *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0]] != null"
@@ -155,21 +150,20 @@
             <img style="height: 200px;width: 100%;" [src]="formGroup?.controls?.custresponse?.value[values[0]].imgSrc">
           </ion-col>
         </ion-row>
+        <div class="has-error"
+          *ngIf="!(formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0]] != null && formGroup?.controls?.custresponse?.value[values[0]].imgSrc != null)">
+          Please select image
+        </div>
         <ion-row style="margin-top: 10px;" *ngIf="values[1] != undefined">
           <ion-col size="6" style="display: flex;
         margin-top: 11px;">
             <div style="color: #6a6a6a;">Back</div>
-            <div [ngClass]="(formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Back'] != null && formGroup?.controls?.custresponse?.value['Back'].imgStatus == true) == true?'choose-file-disabled':'choose-file'" 
-            (click)="getPhoto(formGroup,'Back')">Choose File</div>
+            <div
+              [ngClass]="(formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Back'] != null && formGroup?.controls?.custresponse?.value['Back'].imgStatus == true) == true?'choose-file-disabled':'choose-file'"
+              (click)="getPhoto(formGroup,'Back')">Choose File</div>
           </ion-col>
-          <input
-            type="file"
-            name="upload-contract"
-            accept=".jpg,.jpeg,.png"
-            (change)="handleChangeBack($event,formGroup,'Back')"
-            style="display: none"
-            id="uploadBack"
-            />
+          <input type="file" name="upload-contract" accept=".jpg,.jpeg,.png"
+            (change)="handleChangeBack($event,formGroup,'Back')" style="display: none" id="uploadBack" />
           <div
             *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Back'] != null"
             style="padding-left: 37px;padding-top: 17px;">{{formGroup?.controls?.custresponse?.value['Back'].imgName}}
@@ -181,6 +175,10 @@
             <img style="height: 200px;width: 100%;" [src]="formGroup?.controls?.custresponse?.value['Back'].imgSrc">
           </ion-col>
         </ion-row>
+        <div class="has-error"
+          *ngIf="!(formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Back'] != null && formGroup?.controls?.custresponse?.value['Back'].imgSrc != null)">
+          Please select image
+        </div>
       </div>
     </div>
   </div>
@@ -191,16 +189,11 @@
         <ion-row style="margin-top: 10px;" *ngIf="values[0] != undefined">
           <ion-col size="6" style="display: flex;">
             <div style="color: #6a6a6a;">Front</div>
-            <div [ngClass]="(formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0]] != null && formGroup?.controls?.custresponse?.value[values[0]].imgStatus == true) == true?'choose-file-disabled':'choose-file'" 
-            (click)="getPhoto(formGroup,values[0])">Choose File</div>
-            <input
-            type="file"
-            name="upload-contract"
-            accept=".jpg,.jpeg,.png"
-            (change)="handleChangeFront($event,formGroup,values[0])"
-            style="display: none"
-            id="uploadFrontPAN"
-            />
+            <div
+              [ngClass]="(formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0]] != null && formGroup?.controls?.custresponse?.value[values[0]].imgStatus == true) == true?'choose-file-disabled':'choose-file'"
+              (click)="getPhoto(formGroup,values[0])">Choose File</div>
+            <input type="file" name="upload-contract" accept=".jpg,.jpeg,.png"
+              (change)="handleChangeFront($event,formGroup,values[0])" style="display: none" id="uploadFrontPAN" />
           </ion-col>
           <div
             *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0]] != null"
@@ -212,13 +205,17 @@
           </div>
         </ion-row>
         <ion-row
-        *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0]] != null && formGroup?.controls?.custresponse?.value[values[0]].imgSrc != null">
-        <ion-col>
-          <img style="height: 200px;width: 100%;" [src]="formGroup?.controls?.custresponse?.value[values[0]].imgSrc">
-        </ion-col>
-      </ion-row>
+          *ngIf="formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0]] != null && formGroup?.controls?.custresponse?.value[values[0]].imgSrc != null">
+          <ion-col>
+            <img style="height: 200px;width: 100%;" [src]="formGroup?.controls?.custresponse?.value[values[0]].imgSrc">
+          </ion-col>
+        </ion-row>
+        <div class="has-error"
+          *ngIf="!(formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0]] != null && formGroup?.controls?.custresponse?.value[values[0]].imgSrc != null)">
+          Please select image
         </div>
-        </div>
+      </div>
+    </div>
   </div>
 
   <div *ngSwitchDefault>

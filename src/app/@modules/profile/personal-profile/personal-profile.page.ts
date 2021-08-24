@@ -122,7 +122,7 @@ export class PersonalProfilePage implements OnInit, AfterViewChecked, OnDestroy 
         res.data &&
           res.data.forEach((value) => {
             console.log(value);
-            if (value.profqname === "PAN Card" || value.profqname === "PAN Card") {
+            if (value.profqname === "Country") {
               this.getProfiles().push(
                 this.dynamicNewProfiles(
                   value.profqname,
