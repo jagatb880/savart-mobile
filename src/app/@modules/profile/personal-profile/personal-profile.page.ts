@@ -22,6 +22,7 @@ export class PersonalProfilePage implements OnInit, AfterViewChecked, OnDestroy 
   isEditable = true;
   countryList: any = [];
   private subs = new SubSink();
+  imgErrorStatus: boolean = false;
 
   constructor(
     private profileService: ProfileService,
@@ -180,9 +181,24 @@ export class PersonalProfilePage implements OnInit, AfterViewChecked, OnDestroy 
   }
 
   submitProfile() {
+    this.imgErrorStatus = false;
     console.log(this.profileForm.valid);
     console.log(this.profileForm.value);
+    let a: any = this.profileForm.controls.custProfile;
+    if(a.controls[14].controls.custresponse.value != null && a.controls[14].controls.custresponse.value.Front.imgSrc == null){
+      a.controls[14].controls.custresponse.setErrors({'incorrect': true});
+      this.imgErrorStatus = true;
+    }
+    if(a.controls[14].controls.custresponse.value != null && a.controls[14].controls.custresponse.value.Back.imgSrc == null){
+      a.controls[14].controls.custresponse.setErrors({'incorrect': true});
+      this.imgErrorStatus = true;
+    }
+    if(a.controls[15].controls.custresponse.value != null && a.controls[15].controls.custresponse.value.Front.imgSrc == null){
+      a.controls[15].controls.custresponse.setErrors({'incorrect': true});
+      this.imgErrorStatus = true;
+    }
     if (this.profileForm.valid) {
+      this.imgErrorStatus = false;
       this.loadingService.show();
       this.subs.sink = this.profileService.savePersonalProfileQuestions(this.profileForm.value).subscribe((res) => {
         console.log(res);
@@ -214,7 +230,7 @@ export class PersonalProfilePage implements OnInit, AfterViewChecked, OnDestroy 
           this.toastrService.show({ message: res.data + "\n " + res.error, type: "error" });
         }
       });
-    } else {
+    } else if(!this.imgErrorStatus){
       this.validator.validateAllFormFields(this.profileForm);
       let length = this.getProfiles().length;
       for (let i = length; i > 0; i--) {
@@ -222,6 +238,8 @@ export class PersonalProfilePage implements OnInit, AfterViewChecked, OnDestroy 
         this.getProfiles().controls[i - 1].get("custresponse").updateValueAndValidity();
       }
       this.toastrService.show({ message: "Please fill all the details" });
+    }else{
+      this.toastrService.show({ message: "Please upload the image" });
     }
   }
 

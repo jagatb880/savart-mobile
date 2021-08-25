@@ -261,6 +261,8 @@ export class DynamicInputComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {
     console.log(this.formGroup);
     if(this.inputType == 'P'){
+      this.formGroup.controls.custresponse.clearValidators();
+      this.formGroup.controls.custresponse.updateValueAndValidity();
     }
     if(this.inputType == 'U'){
       if(this.values.length == 0){

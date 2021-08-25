@@ -150,10 +150,10 @@
             <img style="height: 200px;width: 100%;" [src]="formGroup?.controls?.custresponse?.value[values[0]].imgSrc">
           </ion-col>
         </ion-row>
-        <div class="has-error"
+        <!-- <div class="has-error"
           *ngIf="!(formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0]] != null && formGroup?.controls?.custresponse?.value[values[0]].imgSrc != null)">
           Please select image
-        </div>
+        </div> -->
         <ion-row style="margin-top: 10px;" *ngIf="values[1] != undefined">
           <ion-col size="6" style="display: flex;
         margin-top: 11px;">
@@ -175,10 +175,13 @@
             <img style="height: 200px;width: 100%;" [src]="formGroup?.controls?.custresponse?.value['Back'].imgSrc">
           </ion-col>
         </ion-row>
-        <div class="has-error"
+        <ng-container
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate">
+    </ng-container>
+        <!-- <div class="has-error"
           *ngIf="!(formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value['Back'] != null && formGroup?.controls?.custresponse?.value['Back'].imgSrc != null)">
           Please select image
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -210,11 +213,15 @@
             <img style="height: 200px;width: 100%;" [src]="formGroup?.controls?.custresponse?.value[values[0]].imgSrc">
           </ion-col>
         </ion-row>
-        <div class="has-error"
+        
+        <!-- <div class="has-error"
           *ngIf="!(formGroup?.controls?.custresponse?.value != null && formGroup?.controls?.custresponse?.value[values[0]] != null && formGroup?.controls?.custresponse?.value[values[0]].imgSrc != null)">
           Please select image
-        </div>
+        </div> -->
       </div>
+      <ng-container
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate">
+    </ng-container>
     </div>
   </div>
 
