@@ -185,16 +185,16 @@ export class PersonalProfilePage implements OnInit, AfterViewChecked, OnDestroy 
     console.log(this.profileForm.valid);
     console.log(this.profileForm.value);
     let a: any = this.profileForm.controls.custProfile;
-    if(a.controls[14].controls.custresponse.value != null && a.controls[14].controls.custresponse.value.Front.imgSrc == null){
-      a.controls[14].controls.custresponse.setErrors({'incorrect': true});
-      this.imgErrorStatus = true;
-    }
-    if(a.controls[14].controls.custresponse.value != null && a.controls[14].controls.custresponse.value.Back.imgSrc == null){
-      a.controls[14].controls.custresponse.setErrors({'incorrect': true});
-      this.imgErrorStatus = true;
-    }
     if(a.controls[15].controls.custresponse.value != null && a.controls[15].controls.custresponse.value.Front.imgSrc == null){
       a.controls[15].controls.custresponse.setErrors({'incorrect': true});
+      this.imgErrorStatus = true;
+    }
+    if(a.controls[15].controls.custresponse.value != null && a.controls[15].controls.custresponse.value.Back.imgSrc == null){
+      a.controls[15].controls.custresponse.setErrors({'incorrect': true});
+      this.imgErrorStatus = true;
+    }
+    if(a.controls[16].controls.custresponse.value != null && a.controls[16].controls.custresponse.value.Front.imgSrc == null){
+      a.controls[16].controls.custresponse.setErrors({'incorrect': true});
       this.imgErrorStatus = true;
     }
     if (this.profileForm.valid) {
