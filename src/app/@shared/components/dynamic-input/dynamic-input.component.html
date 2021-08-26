@@ -103,6 +103,21 @@
     </ng-template>
   </div>
 
+  <div *ngSwitchCase="'N'">
+    <ng-container
+      *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate">
+    </ng-container>
+    <ng-container *ngIf="values?.length > 0; else RNvalues">
+      <app-nk-single-select [ngClass]="disabled?'disabled-tag':'enabled-tag'"
+        [value]="formGroup?.controls?.custresponse?.value"
+        (ionChange)="onChanged($event?.target?.value || $event?.detail?.value)" [list]="values"></app-nk-single-select>
+    </ng-container>
+    <ng-template #RNvalues>
+      <app-nk-text [ngClass]="disabled?'disabled-tag':'enabled-tag'" [value]="formGroup?.controls?.custresponse?.value"
+        type="number" (input)="onChange($event?.target?.value)"></app-nk-text>
+    </ng-template>
+  </div>
+
   <div *ngSwitchCase="'S'">
     <ng-container
       *ngIf="formGroup?.controls?.custresponse?.dirty && formGroup?.controls?.custresponse?.valid; else errortemplate">
